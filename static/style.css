@@ -1,0 +1,61 @@
+body{
+    width:100vw;
+    height: 100vh;
+    background-color: rgb(178, 248, 219);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+header{
+    padding: 20px;
+    position: relative;
+    display: flex;
+}
+/* menu */
+.menu{
+    overflow: hidden;
+    background-color: #333;
+    height: 40px;
+    /* width: max-content; */
+    line-height: 40px;
+    border-radius: 8px;
+    position: absolute;
+    right: 30px;
+}
+.menu a{
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    font-size: 17px;
+}
+.menu a:hover{
+    background-color: #ddd;
+    color: black;
+}
+.menu a.active{
+    background-color: #04AA6D;
+    color: white;
+}
+
+/* Promo */
+.promo{
+    width: 95%;
+    min-height: 380px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(142, 225, 9);
+    text-align: center;
+    display: relative;
+}
+.box{
+    width: 500px;
+    height: 350px;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: azure;
+    display: inline-block;
+}
+.sign{
+    font-size: 60px;
+    font-weight: 600;  
+    display: inline-block;
+}
