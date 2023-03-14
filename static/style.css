@@ -1,13 +1,47 @@
 body{
     width:100vw;
     height: 100vh;
-    background-color: rgb(178, 248, 219);
+    background-color: rgb(200, 230, 217);
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color:rgb(53, 81, 99);
+    text-align: center;
+}
+body img{
+    border-radius: 15px;
 }
 header{
     padding: 20px;
     position: relative;
     display: flex;
+    border-bottom: lightblue solid 3px;
+}
+.search{
+    padding-left: 5vw;
+    padding-top: 1vw;
+    padding-bottom: 30px;
+    padding-top: 70px;
+}
+.search input{
+    width: 25vw;
+    height: 2vw;
+    border-radius:7px;
+    border: green solid 2px;
+    font-size: 20px;
+    font-weight: 500;
+}
+.search button {
+    width:7vw;
+    height: 2.5vw;
+    border-radius:7px;
+    background-color: #04AA6D;
+    border:#04AA6D solid 1px;
+    color: white;
+    font-size: 15px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.search button:hover{
+    background-color: #ddd;
+    color:black;
 }
 /* menu */
 .menu{
@@ -18,7 +52,7 @@ header{
     line-height: 40px;
     border-radius: 8px;
     position: absolute;
-    right: 30px;
+    right: 30px;    
 }
 .menu a{
     color: #f2f2f2;
@@ -39,23 +73,94 @@ header{
 /* Promo */
 .promo{
     width: 95%;
-    min-height: 380px;
+    min-height: 60%;
     margin-left: auto;
     margin-right: auto;
-    background-color: rgb(142, 225, 9);
+    /* background-color: rgb(143, 145, 140); */
     text-align: center;
-    display: relative;
+    display: flex;
+    justify-content: center;
+}
+.promo, .category{
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 80px;
+    padding-top: 45px;
+    padding-bottom: 40px;
+    /* border:#333 solid 1px;
+    border-radius: 20px; */
 }
 .box{
-    width: 500px;
-    height: 350px;
+    width: 39vw;
+    height: 23vw;
     margin: 10px;
     border-radius: 10px;
     background-color: azure;
-    display: inline-block;
+    padding-bottom:75px;
 }
-.sign{
-    font-size: 60px;
-    font-weight: 600;  
-    display: inline-block;
+.box img{
+    width: 39vw;    
+    height: 24vw;
+    /* padding-top: .5vw; */
+}
+.sign{    
+    font-size: 3.5vw;
+    font-weight: 600;
+    padding-top: 120px;
+    visibility: hidden;   
+}
+.sign h3{
+    width:60px;
+    height: 60px;
+    line-height: 60px;
+    background-color: rgb(139, 135, 135);
+    color: #eff3ee;
+    text-align: center;
+    border-radius: 5px;    
+}
+/* .promo:hover>.sign show .sign class inside  promo on hover */
+.promo:hover>.sign {
+    visibility: visible;
+}
+
+/* Category */
+.category{
+    width: 95%;
+    min-height: 70%;
+    background-color: rgb(73, 123, 86);
+    display: flex;
+    justify-content: center;
+    padding-top: 45px;
+    padding-bottom: 45px;
+    flex-wrap: wrap;
+    border-radius: 20px;
+}
+.box-small h3{
+    padding-bottom: 10px;
+}
+.box-small{
+    width: 20vw;
+    height: 13vw;
+    margin: 10px;
+    border-radius: 10px;
+    background-color:azure;
+    padding-bottom: 50px;
+    
+}
+.box-small img{
+    width: 19.5vw;    
+    height: 12vw;
+    padding-top: .5vw;
+}
+/* Footer Table */
+.tbl_list{
+   display: flex; 
+}
+.tbl_shops, .tbl_goods, .tbl_services{
+    padding-right: 50px;
+}
+td{
+    padding-right: 20px;
+    text-align: left;
+    color: white;
 }

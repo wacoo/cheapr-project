@@ -1,16 +1,210 @@
-{% extends "base.html" %}
-
-{% block content %}
-<h1>{% block title%} Home {% endblock%}</h1>
+{% extends "base.html" %} {% block content %}
 <section class="container">
-    <div class="promo">
-        <div class="sign"><</div>
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="sign">></div>
+    <div class="search">
+        <label for="search"></label>
+        <input type="text" name="search" value="" placeholder="Search">
+        <button><strong>Search</strong></button>   
     </div>
-    <div class = "category">
-
+    <h1>{% block title%} Winners of the Week {% endblock%}</h1>
+  <div class="promo">
+    <div class="sign"><h3>&lt</h3></div>
+    <div class="box">
+      <img src="/static/images/placeholder.webp" alt="placeholder" />
+      <h3>Shop: No Name, Product: No Name</h3>
     </div>
+    <div class="box">
+      <img src="/static/images/placeholder.webp" alt="placeholder" />
+      <h3>Shop: No Name, Service: No Name</h3>
+    </div>
+    <div class="sign"><h3>&gt</h3></div>
+  </div>
+  <div class="cat_goods">
+    <h2>Cheapest Shops</h2>
+    <div class="category">
+      <div class="box-small">
+        <img src="/static/images/placeholder.webp" alt="placeholder" />
+        <h3>Super Market</h3>
+      </div>
+      <div class="box-small">
+        <img src="/static/images/placeholder.webp" alt="placeholder" />
+        <h3>Mall</h3>
+      </div>
+      <div class="box-small">
+        <img src="/static/images/placeholder.webp" alt="placeholder" />
+        <h3>Cloth Store</h3>
+      </div>
+      <div class="box-small">
+        <img src="/static/images/placeholder.webp" alt="placeholder" />
+        <h3>Pharmacy</h3>
+      </div>
+      <div class="box-small">
+        <img src="/static/images/placeholder.webp" alt="placeholder" />
+        <h3>Market</h3>
+      </div>
+      <div class="box-small">
+        <img src="/static/images/placeholder.webp" alt="placeholder" />
+        <h3>Shop</h3>
+      </div>
+      <div class="box-small">
+        <img src="/static/images/placeholder.webp" alt="placeholder" />
+        <h3>Legal Service</h3>
+      </div>
+      <div class="box-small">
+        <img src="/static/images/placeholder.webp" alt="placeholder" />
+        <h3>Beauty Salon</h3>
+      </div>
+    </div>
+  </div>
+  <div class="cat_goods">
+    <h2>Cheapest Goods</h2>
+    <div class="category">
+      <div class="box-small">
+        <img src="/static/images/placeholder.webp" alt="placeholder" />
+        <h3>Food</h3>
+      </div>
+      <div class="box-small">
+        <img src="/static/images/placeholder.webp" alt="placeholder" />
+        <h3>Cloth</h3>
+      </div>
+      <div class="box-small">
+        <img src="/static/images/placeholder.webp" alt="placeholder" />
+        <h3>Electronics</h3>
+      </div>
+      <div class="box-small">
+        <img src="/static/images/placeholder.webp" alt="placeholder" />
+        <h3>House</h3>
+      </div>
+      <div class="box-small">
+        <img src="/static/images/placeholder.webp" alt="placeholder" />
+        <h3>Vehicle</h3>
+      </div>
+      <div class="box-small">
+        <img src="/static/images/placeholder.webp" alt="placeholder" />
+        <h3>Machinary</h3>
+      </div>
+      <div class="box-small">
+        <img src="/static/images/placeholder.webp" alt="placeholder" />
+        <h3>Furniture</h3>
+      </div>
+      <div class="box-small">
+        <img src="/static/images/placeholder.webp" alt="placeholder" />
+        <h3>Kitchen Ware</h3>
+      </div>
+    </div>
+  </div>
+  <div class="cat_services">
+    <div class="cat_goods">
+      <h2>Cheapest Services</h2>
+      <div class="category">
+        <div class="box-small">
+          <img src="/static/images/placeholder.webp" alt="placeholder" />
+          <h3>Beauty</h3>
+        </div>
+        <div class="box-small">
+          <img src="/static/images/placeholder.webp" alt="placeholder" />
+          <h3>Legal</h3>
+        </div>
+        <div class="box-small">
+          <img src="/static/images/placeholder.webp" alt="placeholder" />
+          <h3>Cleaning</h3>
+        </div>
+        <div class="box-small">
+          <img src="/static/images/placeholder.webp" alt="placeholder" />
+          <h3>Plumbing</h3>
+        </div>
+        <div class="box-small">
+          <img src="/static/images/placeholder.webp" alt="placeholder" />
+          <h3>Egineering</h3>
+        </div>
+        <div class="box-small">
+          <img src="/static/images/placeholder.webp" alt="placeholder" />
+          <h3>Transport</h3>
+        </div>
+        <div class="box-small">
+          <img src="/static/images/placeholder.webp" alt="placeholder" />
+          <h3>Event Planning</h3>
+        </div>
+        <div class="box-small">
+          <img src="/static/images/placeholder.webp" alt="placeholder" />
+          <h3>Medical</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tbl_list category">
+    <div class="tbl_shops">
+        <table>
+            <tr>
+                <td class="fa fa-shopping-cart"></i></td>
+                <td>Shoa Shopping Center</td>
+            </tr>
+            <tr>
+                <td class="fa fa-shopping-basket"></td>
+                <td>Yirga haile Mall</td>
+            </tr>
+            <tr>
+                <td class="fa fa-shopping-basket"></td></td>
+                <td>ABC Trading</td>
+            </tr>
+            <tr>
+                <td class="fa fa-shopping-cart"></i></td>
+                <td>Asfawu Vegetable and Fruit Shop</td>
+            </tr>
+            <tr>
+                <td class="fa fa-shopping-basket"></td></td>
+                <td>Fresh Corner</td>
+            </tr>
+        </table>        
+    </div>
+    <div class="tbl_goods">
+        <table>
+            <tr>
+                <td class="fa fa-shopping-cart"></i></td>
+                <td>Shoa Shopping Center</td>
+            </tr>
+            <tr>
+                <td class="fa fa-shopping-basket"></td>
+                <td>Yirga haile Mall</td>
+            </tr>
+            <tr>
+                <td class="fa fa-shopping-basket"></td></td>
+                <td>ABC Trading</td>
+            </tr>
+            <tr>
+                <td class="fa fa-shopping-cart"></i></td>
+                <td>Asfawu Vegetable and Fruit Shop</td>
+            </tr>
+            <tr>
+                <td class="fa fa-shopping-basket"></td></td>
+                <td>Fresh Corner</td>
+            </tr>
+        </table> 
+    </div>
+    <div class="tbl_services">
+        <table>
+            <tr>
+                <td class="fa fa-wrench"></i></td>
+                <td>Raji Electric Installation</td>
+            </tr>
+            <tr>
+                <td class="fa fa-briefcase"></td>
+                <td>Jacob Attorney in Law</td>
+            </tr>
+            <tr>
+                <td class="fa fa-scissors"></td></td>
+                <td>Tesemma Barbery</td>
+            </tr>
+            <tr>
+                <td class="fa fa-scissors"></i></td>
+                <td>Ruth Beauty Salon</td>
+            </tr>
+            <tr>
+                <td class="fa fa-wrench"></td></td>
+                <td>Tadesse Plumbing</td>
+            </tr>
+        </table> 
+    </div>
+  </div>
+    
 </section>
 {% endblock %}
