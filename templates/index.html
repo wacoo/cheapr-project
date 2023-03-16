@@ -1,58 +1,64 @@
 {% extends "base.html" %} 
 {% block title %} Home {% endblock%}
 {% block content %}
-<section class="container">
-    <div class="search">
-        <label for="search"></label>
-        <input type="text" name="search" value="" placeholder="Search">
-        <button><strong>Search</strong></button>   
-    </div>
+<section class="container">    
     <h1>{% block tit %} Winners of the Week {% endblock%}</h1>
   <div class="promo">
     <div class="sign"><h3>&lt</h3></div>
     <div class="box">
-      <img src="/static/images/placeholder.webp" alt="placeholder" />
+      <img src="/static/images/box-11.jpg" alt="placeholder" />
       <h3>Shop: No Name, Product: No Name</h3>
+      <div>
+        <img src="/static/images/1.png" alt="badge">
+      </div>
     </div>
     <div class="box">
-      <img src="/static/images/placeholder.webp" alt="placeholder" />
+      <img src="/static/images/box-2.jpg" alt="placeholder" />
       <h3>Shop: No Name, Service: No Name</h3>
+      <div>
+        <img src="/static/images/1.png" alt="badge">
+      </div>
     </div>
     <div class="sign"><h3>&gt</h3></div>
   </div>
+  <!-- <div class="search">
+    <label for="search"></label>
+    <input type="text" name="search" value="" placeholder="Search">
+    <button><strong>Search</strong></button>   
+  </div> -->
   <div class="cat_goods">
     <h2>Cheapest Shops</h2>
     <div class="category">
       <div class="box-small">
-        <img src="/static/images/placeholder.webp" alt="placeholder" />
+        <img src="/static/images/supermarket.jpg" alt="placeholder" />
         <h3>Super Market</h3>
       </div>
       <div class="box-small">
-        <img src="/static/images/placeholder.webp" alt="placeholder" />
+        <img src="/static/images/mall.jpg" alt="placeholder" />
         <h3>Mall</h3>
       </div>
       <div class="box-small">
-        <img src="/static/images/placeholder.webp" alt="placeholder" />
+        <img src="/static/images/cloth.jpg" alt="placeholder" />
         <h3>Cloth Store</h3>
       </div>
       <div class="box-small">
-        <img src="/static/images/placeholder.webp" alt="placeholder" />
+        <img src="/static/images/pharmacy.jpg" alt="placeholder" />
         <h3>Pharmacy</h3>
       </div>
       <div class="box-small">
-        <img src="/static/images/placeholder.webp" alt="placeholder" />
+        <img src="/static/images/market.jpg" alt="placeholder" />
         <h3>Market</h3>
       </div>
       <div class="box-small">
-        <img src="/static/images/placeholder.webp" alt="placeholder" />
+        <img src="/static/images/shop.webp" alt="placeholder" />
         <h3>Shop</h3>
       </div>
       <div class="box-small">
-        <img src="/static/images/placeholder.webp" alt="placeholder" />
+        <img src="/static/images/legal.jpg" alt="placeholder" />
         <h3>Legal Service</h3>
       </div>
       <div class="box-small">
-        <img src="/static/images/placeholder.webp" alt="placeholder" />
+        <img src="/static/images/beauty salon.jpg" alt="placeholder" />
         <h3>Beauty Salon</h3>
       </div>
     </div>

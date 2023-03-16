@@ -11,9 +11,21 @@ body img{
 }
 header{
     padding: 20px;
+    padding-top: 30px;
     position: relative;
     display: flex;
-    border-bottom: lightblue solid 3px;
+    border-bottom: lightblue solid 5px;
+}
+section{
+    /* color: aliceblue; */
+    font-size: 25px;
+}
+.container h1{
+    font-size: 50px;
+    color: black;
+    padding: 0;
+    margin: 0;
+    margin-top: 30px;
 }
 .search{
     padding-left: 5vw;
@@ -21,22 +33,23 @@ header{
     padding-bottom: 30px;
     padding-top: 70px;
 }
-.search input{
-    width: 25vw;
-    height: 2vw;
+.search input, filter input, select{
+    width: 50vw;
+    height: 3vw;
     border-radius:7px;
     border: green solid 2px;
     font-size: 20px;
     font-weight: 500;
 }
 .search button {
-    width:7vw;
-    height: 2.5vw;
+    width:8vw;
+    height: 3.6vw;
     border-radius:7px;
     background-color: #04AA6D;
     border:#04AA6D solid 1px;
     color: white;
-    font-size: 15px;
+    font-size: 25px;
+    margin-left: 10px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 .search button:hover{
@@ -44,7 +57,8 @@ header{
     color:black;
 }
 /* menu */
-.menu{
+.menu{    
+    margin-top: 30px;
     overflow: hidden;
     background-color: #333;
     height: 40px;
@@ -80,13 +94,14 @@ header{
     text-align: center;
     display: flex;
     justify-content: center;
+    
+    margin-bottom: 80px;
+    padding-top: 40px;
+    padding-bottom: 30px;
 }
 .promo, .category{
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 80px;
-    padding-top: 45px;
-    padding-bottom: 40px;
     /* border:#333 solid 1px;
     border-radius: 20px; */
 }
@@ -96,11 +111,20 @@ header{
     margin: 10px;
     border-radius: 10px;
     background-color: azure;
-    padding-bottom:75px;
+    padding-bottom:80px;
+    position: relative;
+}
+.box div img{
+    position: absolute;
+    bottom: -10vw;
+    right: -3vw;
+    width: 13vw;
+    height: 18vw;
+    z-index: 3;
 }
 .box img{
     width: 39vw;    
-    height: 24vw;
+    height: 25.5vw;
     /* padding-top: .5vw; */
 }
 .sign{    
@@ -127,16 +151,19 @@ header{
 .category{
     width: 95%;
     min-height: 70%;
-    background-color: rgb(73, 123, 86);
+    background-color: rgb(95, 96, 95);
     display: flex;
     justify-content: center;
-    padding-top: 45px;
-    padding-bottom: 45px;
+    padding-top: 30px;    
+    margin-bottom: 30px;
+    padding-top: 40px;
+    padding-bottom: 80px;
     flex-wrap: wrap;
     border-radius: 20px;
 }
 .box-small h3{
-    padding-bottom: 10px;
+    padding-bottom:30px;
+    font-size: 20px;
 }
 .box-small{
     width: 20vw;
@@ -149,8 +176,12 @@ header{
 }
 .box-small img{
     width: 19.5vw;    
-    height: 12vw;
+    height: 14vw;
     padding-top: .5vw;
+}
+.box-small h3, .box h3{
+    margin-top: 3px;
+    margin-bottom: 3px;
 }
 /* Footer Table */
 .tbl_list{
@@ -163,4 +194,61 @@ td{
     padding-right: 20px;
     text-align: left;
     color: white;
+}
+
+/* filter */
+.filter{
+    width: 100%;
+    min-height:4%;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    border-bottom: lightblue solid 5px;
+    background-color: #04AA6D;
+    font-size: 25px;
+}
+form input, form select{
+    margin-right: 10px;
+}
+form input {
+    width: 20vw;
+    height: 2vw;
+    border-radius:7px;
+    border: green solid 2px;
+    font-size: 15px;
+    font-weight: 500;
+}
+form button {
+    width:6vw;
+    height: 2.5vw;
+    border-radius:7px;
+    background-color:#333;
+    border:#04AA6D solid 1px;
+    color: white;
+    font-size: 16px;
+    margin-left: 10px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+form select{
+    width: 20vw;
+    height: 2.5vw;
+    border-radius:7px;
+    border: green solid 2px;
+    font-size: 20px;
+    font-weight: 500;
+}
+/* table */
+.table{
+    width: 95%;
+    background-color: lightblue;
+    margin: 40px;
+    border-radius: 10px;
+}
+ td {
+    color: rgb(77, 72, 78);
+    padding-top: 20px;
+    padding-right: 20px;
+    padding-left: 40px;
+ }
+td {
+    margin-right: 10px;
 }

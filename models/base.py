@@ -7,10 +7,16 @@ class Base:
     """ base class """
     def __init__(self, *args, **kwargs):
         """ init base class """
-        self.id = uuid.uuid4()
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
-        self.to_dict()
+        if kwargs:
+            for key, val in kwargs.items():
+                if key != "__class__":
+                    setattr(self, key, val)
+            self.__dict__["__class__"] = self.__class__.__name__
+        else:
+            self.id = uuid.uuid4()
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
+            self.to_dict()
 
     def to_dict(self):
         """ convert id and dates to string in dict"""

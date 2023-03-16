@@ -18,7 +18,7 @@
 <body>
     <header>
         <div class="logo">
-            <img src="/static/images/cheapr logo.png" alt="Cheaper logo" width="100px">
+            <img src="/static/images/cheapr logo.png" alt="Cheaper logo" width="150px">
         </div>
         <div class="menu">
             <a class = "{{cls_home}}" href="/views/">Home</a>
@@ -26,14 +26,32 @@
             <a class = "{{cls_good}}" href="/views/goods">Goods</a>
             <a class = "{{cls_serv}}" href="/views/services">Services</a>
             <a class = "{{cls_promo}}" href="/views/promos">Promotions</a>
-        </div>
+        </div>        
     </header>
-    <script src="/static/script.js"></script>
+    <div class="filter">
+        <form action="">
+            <label for="city">City </label>
+            <select name="city" id="city">
+                <option value="addis">Addis Ababa</option>
+                <option value="dire">Dire Dawa</option>
+                <option value="hawassa">Hawassa</option>
+                <option value="all">All</option>
+            </select>
+            <label for="type">Type</label>
+            <select name="type" id="type">
+                <option value="shop">Shop</option>
+                <option value="good">Good</option>
+                <option value="service">Service</option>
+                <option value="all">All</option>
+            </select>
+            <input type="text" id="filter_text" placeholder="Type here...">
+            <button id="search">Search</button>
+        </form>
+    </div>
+    <script src="/static/script.js"></script>    
     {% block content%}        
-        <h1>{% block tit %} Title {% endblock%}</h1>
-        
-    {% endblock %}
-
+        <h1>{% block tit %} Title {% endblock%}</h1>              
+    {% endblock %}          
     <footer>
 
     </footer>
