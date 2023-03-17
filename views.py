@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect
+from flask import Blueprint, render_template
 
 views = Blueprint(__name__, "views")
 
@@ -20,3 +20,11 @@ def services():
 @views.route("/promos")
 def promos():  
     return render_template("promotions.html", cls_promo="active")
+
+@views.route("/register")
+def register():  
+    return render_template("register.html", cls_promo="active")
+
+@views.route("/login")
+def login():  
+    return render_template("login.html", cls_promo="active")

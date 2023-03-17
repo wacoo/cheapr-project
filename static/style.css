@@ -161,6 +161,21 @@ section{
     flex-wrap: wrap;
     border-radius: 20px;
 }
+.cat{
+    width: 900px;
+    height: 460px;
+    background-color: rgba(5, 5, 5, 0.363);
+    display: flex;
+    justify-content: center;
+    padding-top: 30px;    
+    margin-bottom: 30px;
+    padding-top: 40px;
+    padding-bottom: 30px;
+    flex-wrap: wrap;
+    border-radius: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
 .box-small h3{
     padding-bottom:30px;
     font-size: 20px;
@@ -204,18 +219,68 @@ td{
     padding-bottom: 30px;
     border-bottom: lightblue solid 5px;
     background-color: #04AA6D;
-    font-size: 25px;
+    font-size: 15px;
 }
 form input, form select{
     margin-right: 10px;
 }
-form input {
+.filter form input{
     width: 20vw;
     height: 2vw;
     border-radius:7px;
     border: green solid 2px;
     font-size: 15px;
     font-weight: 500;
+    color: #333;
+}
+.filter form select {
+    height: 2.5vw; 
+    font-size: 15px;  
+    color: #333; 
+}
+.reg form {
+    position: relative;
+}
+.reg form input {
+    height: 23px;
+    width: 200px;
+    border-radius:7px;
+    border: green solid 2px;
+    font-size: 15px;
+    font-weight: 500;
+    margin: 10px;   
+     
+}
+.reg form .input_last input{
+    width: 128px;
+    
+}
+.reg form .input_last button{
+    font-size: 11px;
+    width: 70px;
+    height: 35px;
+    margin-left: 0;
+    
+}
+.input_last{
+    display: block;
+    margin-top: 30px;
+    text-align: left;    
+}
+form div{
+    margin-top: 30px;
+    position: absolute;
+    right: 40px;
+    bottom: -20px;
+}
+
+.reg form select {
+    height: 25px;
+    width: 200px;
+    margin: 10px;
+    font-size: 15px;  
+    color: #333;
+    margin-left: 10px;
 }
 form button {
     width:6vw;
@@ -243,6 +308,29 @@ form select{
     margin: 40px;
     border-radius: 10px;
 }
+ .reg {
+    width: 50%;
+    background-color: lightblue;
+    margin: 40px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 400;    
+ }
+ .reg form select{
+    width: 21vw;
+    font-size: 15px;
+ }
+ .reg form{
+    display: table;
+    padding: 30px;
+ }
+ .reg p{
+    display: table-row;
+ }
+ .reg form label, .reg form input, .reg form select {
+    text-align: left;
+    display: table-cell;
+ }
  td {
     color: rgb(77, 72, 78);
     padding-top: 20px;

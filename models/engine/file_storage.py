@@ -18,8 +18,13 @@ class Storage:
     
     def new(self, obj):
         """ add new object """
+        if obj.__dict__["__class__"] == "User":  # unique          
+            for ob in self.all().values():
+                if (ob.__dict__["username"] == obj.__dict__["username"]):
+                    return False
         Storage.__objects[obj.__class__.__name__ + "." + obj.id] = obj
         self.save()
+        return True
 
     def save(self):
         """ save object to file"""
@@ -36,10 +41,14 @@ class Storage:
     def reload(self):
         """ reload objects from file """
         with open(Storage.__filepath, "r") as f:
-            dict_obj_attribs = json.load(f)
-            for obj in dict_obj_attribs.values():
-                cl_name = obj["__class__"]
-                self.new(eval(cl_name)(**obj)) # same as self.new(User(obj))
+            try:
+                dict_obj_attribs = json.load(f)
+                if dict_obj_attribs:
+                    for obj in dict_obj_attribs.values():
+                        cl_name = obj["__class__"]
+                        self.new(eval(cl_name)(**obj)) # same as self.new(User(obj))
+            except Exception as e:
+                print("Exception")
     
     def delete(self, obj=None):
         """ remove object from Storage.__objects """
@@ -71,4 +80,12 @@ class Storage:
                 if cls == val.__class__.__name__:
                     count += 1
         return count
+    
+    def getpass(self, uname=None):
+        """ return password"""
+        if uname:
+            self.reload()
+            for obj in self.all().values():
+                if uname == obj.__dict__["username"]:
+                    return obj.__dict__["password"]
 

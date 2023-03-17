@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{% block title %} User Registration {% endblock %}</h1>
+<section class="container">    
+    <div class="cat">
+        <div class="reg">
+            <form action="" method="post">
+                <p>
+                <label for="fname">First Name:</label>
+                <input type="text" id="fname"  name="fname" placeholder="First Name">
+                </p>
+                <p>
+                    <label for="mname">Middle Name:</label>
+                    <input type="text" id="mname"  name="mname" placeholder="Middle Name">
+                </p>
+                
+                <p>
+                    <label for="lname">Last Name:</label>
+                    <input type="text" id="lname"  name="lname" placeholder="Last Name">
+                </p>
+                <p>
+                    <label for="city">City of Residence:</label>
+                    <select name="city" id="city">
+                        <option value="Addis Ababa">Addis Ababa</option>
+                        <option value="Dire Dawa">Dire Dawa</option>
+                        <option value="Hawassa">Hawassa</option>
+                        <option value="Bahir Dar">Bahir Dar</option>
+                        <option value="Semera">Semera</option>
+                        <option value="Asosa">Asosa</option>
+                        <option value="Gambella">Gambella</option>
+                        <option value="Mekele">Mekele</option>
+                        <option value="Harar">Harar</option>
+                        <option value="Gigjiga">Gigjiga</option>
+                    </select>
+                </p>                
+                <p>
+                    <label for="type">User Type:</label>
+                    <select name="type" id="type">
+                        <option value="regular">Regular</option>
+                        <option value="agent">Agent</option>
+                        <option value="admin">System Administrator</option>
+                    </select>
+                </p>
+                <p class="input_last">
+                    <label for="location">Location:</label>
+                    <input type="text" id="location"  name="location" placeholder="Location">
+                    <button id="get_gps">Get Loc.</button>
+                </p>
+                <div>
+                    <p class="input_last">
+                        <button id="submit">Submit</button>
+                    </p>
+                </div>
+                
+                
+            </form>            
+        </div>
+    </div>
+</section>
+{% endblock %}
