@@ -27,23 +27,16 @@ section{
     margin: 0;
     margin-top: 30px;
 }
-.search{
+/* .search{
     padding-left: 5vw;
     padding-top: 1vw;
     padding-bottom: 30px;
     padding-top: 70px;
-}
-.search input, filter input, select{
-    width: 50vw;
-    height: 3vw;
-    border-radius:7px;
-    border: green solid 2px;
-    font-size: 20px;
-    font-weight: 500;
-}
-.search button {
+} */
+ 
+/* .search button {
     width:8vw;
-    height: 3.6vw;
+    height: 28vw;
     border-radius:7px;
     background-color: #04AA6D;
     border:#04AA6D solid 1px;
@@ -55,7 +48,7 @@ section{
 .search button:hover{
     background-color: #ddd;
     color:black;
-}
+} */
 /* menu */
 .menu{    
     margin-top: 30px;
@@ -161,9 +154,10 @@ section{
     flex-wrap: wrap;
     border-radius: 20px;
 }
+/* .cat register grey area */
 .cat{
-    width: 900px;
-    height: 460px;
+    width: 100%;
+    height: 640px;
     background-color: rgba(5, 5, 5, 0.363);
     display: flex;
     justify-content: center;
@@ -221,20 +215,32 @@ td{
     background-color: #04AA6D;
     font-size: 15px;
 }
+filter input, select{
+    width: 50vw;
+    height: 3vw;
+    border-radius:7px;
+    border: green solid 2px;
+    font-size: 20px;
+    font-weight: 500;
+} 
 form input, form select{
     margin-right: 10px;
 }
 .filter form input{
     width: 20vw;
-    height: 2vw;
+    height: 28px;
     border-radius:7px;
     border: green solid 2px;
     font-size: 15px;
     font-weight: 500;
     color: #333;
 }
+.filter form button{
+    height: 35px;
+    width: 80px;
+}
 .filter form select {
-    height: 2.5vw; 
+    height: 33px; 
     font-size: 15px;  
     color: #333; 
 }
@@ -243,7 +249,7 @@ form input, form select{
 }
 .reg form input {
     height: 23px;
-    width: 200px;
+    width: 30vw;
     border-radius:7px;
     border: green solid 2px;
     font-size: 15px;
@@ -252,11 +258,11 @@ form input, form select{
      
 }
 .reg form .input_last input{
-    width: 128px;
+    width: 24vw;
     
 }
 .reg form .input_last button{
-    font-size: 11px;
+    font-size: 12px;
     width: 70px;
     height: 35px;
     margin-left: 0;
@@ -274,9 +280,9 @@ form div{
     bottom: -20px;
 }
 
-.reg form select {
-    height: 25px;
-    width: 200px;
+.reg form p select {
+    height: 30px;
+    width: 30vw;
     margin: 10px;
     font-size: 15px;  
     color: #333;

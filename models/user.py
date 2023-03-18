@@ -8,6 +8,8 @@ class User(Base):
     lastname = ""
     username = ""
     password = ""
+    city = ""
+    location = ""
     usertype= ""
     active= False
     

@@ -17,12 +17,12 @@ class Storage:
         
     
     def new(self, obj):
-        """ add new object """
+        """ add new object """        
         if obj.__dict__["__class__"] == "User":  # unique          
             for ob in self.all().values():
                 if (ob.__dict__["username"] == obj.__dict__["username"]):
                     return False
-        Storage.__objects[obj.__class__.__name__ + "." + obj.id] = obj
+        Storage.__objects[obj.__class__.__name__ + "." + obj.id] = obj        
         self.save()
         return True
 
@@ -41,14 +41,11 @@ class Storage:
     def reload(self):
         """ reload objects from file """
         with open(Storage.__filepath, "r") as f:
-            try:
-                dict_obj_attribs = json.load(f)
-                if dict_obj_attribs:
-                    for obj in dict_obj_attribs.values():
-                        cl_name = obj["__class__"]
-                        self.new(eval(cl_name)(**obj)) # same as self.new(User(obj))
-            except Exception as e:
-                print("Exception")
+            dict_obj_attribs = json.load(f)
+            if dict_obj_attribs:
+                for obj in dict_obj_attribs.values():
+                    cl_name = obj["__class__"]
+                    self.new(eval(cl_name)(**obj)) # same as self.new(User(obj))
     
     def delete(self, obj=None):
         """ remove object from Storage.__objects """

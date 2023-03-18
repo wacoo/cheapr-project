@@ -28,3 +28,7 @@ def register():
 @views.route("/login")
 def login():  
     return render_template("login.html", cls_promo="active")
+
+@views.route("/add_shop")
+def add_shop():  
+    return render_template("add_shop.html", cls_promo="active")

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{% block title %} Shop Registration {% endblock %}</h1>
+<section class="container">    
+    <div class="cat">
+        <div class="reg">
+            <form action="/api/v1/add/user" method="post">
+                <p>
+                    <label for="sname">Shop Name:</label>
+                    <input type="text" id="sname"  name="sname" placeholder="Shop Name">
+                </p>                
+                <p>
+                    <label for="stype">Shop Type:</label>
+                    <select name="stype" id="stype">
+                        <option value="Shop">Shop</option>                        
+                        <option value="Open Market">Open Market</option>
+                        <option value="Super Market">Super Market</option>
+                        <option value="Mall">Mall</option>
+                        <option value="Producer">Producer</option>
+                        <option value="Retailer">Retailer</option>                        
+                        <option value="Service Provider">Service Provider</option>
+                    </select>
+                    <select name="s_ptype" id="s_ptype">
+                        <option value="Vagitable">Vagitable</option>                        
+                        <option value="Grain">Grain</option>
+                        <option value="Office Materials">Office Materials</option>
+                        <option value="Building Materials">Building Materials</option>
+                        <option value="Clothing">Clothing</option>
+                        <option value="Furniture">Furniture</option>                        
+                        <option value="Machinary">Machinary</option>
+                        <option value="Electronics">Electronics</option>
+                        <option value="Garage">Garage</option>
+                    </select>
+                </p> 
+                <p>
+                    <label for="scity">Shop Name:</label>
+                    <input type="text" id="scity"  name="scity" placeholder="City">
+                </p>
+                <p class="input_last">
+                    <label for="rlocation">Location:</label>
+                    <input type="text" id="rlocation"  name="rlocation" placeholder="Location">
+                    <button type="button" id="get_gps">Get Loc.</button>
+                </p>
+                <div>
+                    <p class="input_last">
+                        <button type="submit" id="submit">Submit</button>
+                    </p>
+                </div> 
+            </form>  
+        </div>
+    </div>
+</section>  
+{% endblock %}

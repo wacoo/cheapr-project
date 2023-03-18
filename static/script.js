@@ -1,11 +1,14 @@
-const btn_loc = document.getElementById("get_gps");
-const txtloc = document.getElementById("location")
+let btn_loc = document.querySelector("#get_gps");
+const txtloc = document.querySelector("#rlocation")
 
-btn_loc.addEventListener("click", showPosition);
+if (btn_loc){
+    btn_loc.addEventListener('click', getLocation);
+}
+
 
 function getLocation() {
     if (navigator.geolocation) {
-        navigator.geolocation.watchPosition(showPosition);
+        navigator.geolocation.getCurrentPosition(showPosition);
     } else {
         txtloc.value = "Geolocation is not supported my browser!"
     }

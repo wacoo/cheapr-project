@@ -54,14 +54,13 @@
             <input type="text" id="filter_text" placeholder="Type here...">
             <button id="search">Search</button>
         </form>
-    </div>
-    <script src="/static/script.js"></script>    
+    </div>  
     {% block content%}        
         <h1>{% block tit %} Title {% endblock%}</h1>              
     {% endblock %}          
     <footer>
 
     </footer>
-    <script src="/static/script.js"></script>
+    <script src="{{url_for('static', filename='script.js')}}"></script>
 </body>
 </html>

@@ -1,5 +1,7 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, url_for
 from models.engine.file_storage import Storage
+from models.user import User
+
 api = Blueprint(__name__, "api")
 storage = Storage()
 
@@ -60,8 +62,33 @@ def delete(uname=None):
 
 """ POST """
 @api.route("/add/user", methods=["GET", "POST"])
-def add_user():    
-    return
+def add_user():
+    """ add new user """
+    fname = request.form.get("rfname")
+    mname = request.form.get("rmname")
+    lname = request.form.get("rlname")
+    uname = request.form.get("runame")
+    passwd = request.form.get("rpwd")
+    cpasswd = request.form.get("rcpwd")
+    city = request.form.get("rcity")
+    utype = request.form.get("rtype")
+    gps = request.form.get("rlocation")
+
+    if passwd == cpasswd and passwd:
+        user = User()
+        user.firstname = fname
+        user.middlename = mname
+        user.lastname = lname
+        user.username = uname
+        user.password = passwd
+        user.city = city
+        user.location = gps
+        user.active = True
+        storage.reload()
+        storage.new(user)
+        return user.id
+    else:
+        return "Failed!"
 
 @api.route("/add/shop", methods=["GET", "POST"])
 def add_shop():

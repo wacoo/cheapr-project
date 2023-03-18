@@ -5,23 +5,35 @@
 <section class="container">    
     <div class="cat">
         <div class="reg">
-            <form action="" method="post">
+            <form action="/api/v1/add/user" method="post">
                 <p>
-                <label for="fname">First Name:</label>
-                <input type="text" id="fname"  name="fname" placeholder="First Name">
+                <label for="rfamer">First Name:</label>
+                <input type="text" id="rfname"  name="rfname" placeholder="First Name">
                 </p>
                 <p>
-                    <label for="mname">Middle Name:</label>
-                    <input type="text" id="mname"  name="mname" placeholder="Middle Name">
+                    <label for="rmname">Middle Name:</label>
+                    <input type="text" id="rmname"  name="rmname" placeholder="Middle Name">
                 </p>
                 
                 <p>
-                    <label for="lname">Last Name:</label>
-                    <input type="text" id="lname"  name="lname" placeholder="Last Name">
+                    <label for="rlname">Last Name:</label>
+                    <input type="text" id="rlname"  name="rlname" placeholder="Last Name">
                 </p>
                 <p>
-                    <label for="city">City of Residence:</label>
-                    <select name="city" id="city">
+                    <label for="runame">Username:</label>
+                    <input type="text" id="runame"  name="runame" placeholder="Username">
+                </p>                
+                <p>
+                    <label for="rpwd">Password:</label>
+                    <input type="password" id="rpwd"  name="rpwd" placeholder="Password">
+                </p>
+                <p>
+                    <label for="rcpwd">Confirm Password:</label>
+                    <input type="password" id="rcpwd"  name="rcpwd" placeholder="Password">
+                </p>
+                <p>
+                    <label for="rcity">City of Residence:</label>
+                    <select name="rcity" id="rcity">
                         <option value="Addis Ababa">Addis Ababa</option>
                         <option value="Dire Dawa">Dire Dawa</option>
                         <option value="Hawassa">Hawassa</option>
@@ -35,27 +47,25 @@
                     </select>
                 </p>                
                 <p>
-                    <label for="type">User Type:</label>
-                    <select name="type" id="type">
+                    <label for="rtype">User Type:</label>
+                    <select name="rtype" id="rtype">
                         <option value="regular">Regular</option>
                         <option value="agent">Agent</option>
                         <option value="admin">System Administrator</option>
                     </select>
                 </p>
                 <p class="input_last">
-                    <label for="location">Location:</label>
-                    <input type="text" id="location"  name="location" placeholder="Location">
-                    <button id="get_gps">Get Loc.</button>
+                    <label for="rlocation">Location:</label>
+                    <input type="text" id="rlocation"  name="rlocation" placeholder="Location">
+                    <button type="button" id="get_gps">Get Loc.</button>
                 </p>
                 <div>
                     <p class="input_last">
-                        <button id="submit">Submit</button>
+                        <button type="submit" id="submit">Submit</button>
                     </p>
-                </div>
-                
-                
-            </form>            
+                </div> 
+            </form>  
         </div>
     </div>
-</section>
+</section>  
 {% endblock %}
