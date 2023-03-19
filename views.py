@@ -32,3 +32,10 @@ def login():
 @views.route("/add_shop")
 def add_shop():  
     return render_template("add_shop.html", cls_promo="active")
+
+@views.route("/add_product")
+def add_product():  
+    return render_template("add_product.html", cls_promo="active")
+@views.route("/add_service")
+def add_service():  
+    return render_template("add_service.html", cls_promo="active")

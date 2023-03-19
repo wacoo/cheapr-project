@@ -1,5 +1,7 @@
 from flask import Blueprint, jsonify, request, url_for
 from models.engine.file_storage import Storage
+from models.product_service import ProductService
+from models.shop import Shop
 from models.user import User
 
 api = Blueprint(__name__, "api")
@@ -92,10 +94,50 @@ def add_user():
 
 @api.route("/add/shop", methods=["GET", "POST"])
 def add_shop():
-    return
+    owner = request.form.get("sowner")
+    shop = request.form.get("sname")
+    type = request.form.get("stype")
+    product_service = request.form.get("pr_sv") # TODO get this form db
+    city = request.form.get("scity")
+    gps = request.form.get("rlocation")
+    shop1 = Shop()
+    shop1.owner = owner
+    shop1.name = shop
+    shop1.type = type
+    shop1.product_service = product_service
+    shop1.city = city
+    shop1.gps_location = gps
+    storage.reload()
+    storage.new(shop1)
+    return shop1.id #owner +", "+ shop +", " + type  +", " + product_service +", " + city  +", " + gps
+    
 
-@api.route("/add/product_service", methods=["GET", "POST"])
-def add_product_service():
+@api.route("/add/product", methods=["GET", "POST"])
+def add_product():
+    name = request.form.get("pname")
+    brand = request.form.get("pbrand")
+    model = request.form.get("pmodel")
+    category = request.form.get("pcategory")
+    man_date = request.form.get("pmdate")
+    status = request.form.get("pstatus")
+    quality = request.form.get("pquality")
+    price = request.form.get("pprice")
+    shop = request.form.get("pshop")
+    product = ProductService()
+    product.name = name
+    product.brand = brand
+    product.model = model
+    product.category =category
+    product.manufature_date = man_date
+    product.status = status
+    product.quality = quality
+    product.price = price
+    product.shop = shop
+
+    storage.reload()
+    storage.new(product)
+    return product.id
+
     return
 
 @api.route("/add/promotion", methods=["GET", "POST"])

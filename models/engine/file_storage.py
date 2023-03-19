@@ -41,11 +41,14 @@ class Storage:
     def reload(self):
         """ reload objects from file """
         with open(Storage.__filepath, "r") as f:
-            dict_obj_attribs = json.load(f)
-            if dict_obj_attribs:
-                for obj in dict_obj_attribs.values():
-                    cl_name = obj["__class__"]
-                    self.new(eval(cl_name)(**obj)) # same as self.new(User(obj))
+            try:
+                dict_obj_attribs = json.load(f)
+                if dict_obj_attribs:
+                    for obj in dict_obj_attribs.values():
+                        cl_name = obj["__class__"]
+                        self.new(eval(cl_name)(**obj)) # same as self.new(User(obj))
+            except Exception as e:
+                print(e)
     
     def delete(self, obj=None):
         """ remove object from Storage.__objects """

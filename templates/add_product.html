@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{% block title %} Product Registration {% endblock %}</h1>
+<section class="container">    
+    <div class="cat">
+        <div class="reg">
+            <form action="/api/v1/add/product" method="post">
+                <p>
+                    <label for="pname">Shop Owner:</label>
+                    <input type="text" id="pname"  name="pname" placeholder="Product Name">
+                </p>
+                <p>
+                    <label for="pbrand">Brand:</label>
+                    <input type="text" id="pbrand"  name="pbrand" placeholder="Brand">
+                </p>
+                <p>
+                    <label for="pmodel">Model:</label>
+                    <input type="text" id="pmodel"  name="pmodel" placeholder="Model">
+                </p>
+                <p>
+                    <label for="pcategory">Category:</label>
+                    <input type="text" id="pcategory"  name="pcategory" placeholder="Category">
+                </p>
+                <p>
+                    <label for="pmdate">Manufature Date:</label>
+                    <input type="text" id="pmdate"  name="pmdate" placeholder="Man. Date">
+                </p>                
+                <p>
+                    <label for="pstatus">Status:</label>
+                    <select name="pstatus" id="pstatus">
+                        <option value="New">New</option>                        
+                        <option value="Slightly Used">Slightly Used</option>
+                        <option value="Used">Used</option>
+                    </select>
+                </p>
+                <p>
+                    <label for="pquality">Status:</label>
+                    <select name="pquality" id="pquality">
+                        <option value="Original">Original</option>                        
+                        <option value="Copy">Copy</option>
+                    </select>
+                </p>                
+                <p>
+                    <label for="pprice">Unit Price:</label>
+                    <input type="text" id="pprice"  name="pprice" placeholder="Unit Price">
+                </p>
+                <p>
+                    <label for="pshop">Seller:</label>
+                    <input type="text" id="pshop"  name="pshop" placeholder="Shop"> 
+                </p>
+                <div>
+                    <p class="input_last">
+                        <button type="submit" id="submit">Submit</button>
+                    </p>
+                </div> 
+            </form>  
+        </div>
+    </div>
+</section>  
+{% endblock %}

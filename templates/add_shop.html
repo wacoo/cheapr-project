@@ -5,7 +5,11 @@
 <section class="container">    
     <div class="cat">
         <div class="reg">
-            <form action="/api/v1/add/user" method="post">
+            <form action="/api/v1/add/shop" method="post">
+                <p>
+                    <label for="sowner">Shop Owner:</label>
+                    <input type="text" id="sowner"  name="sowner" placeholder="Shop Owner">
+                </p>
                 <p>
                     <label for="sname">Shop Name:</label>
                     <input type="text" id="sname"  name="sname" placeholder="Shop Name">
@@ -21,7 +25,10 @@
                         <option value="Retailer">Retailer</option>                        
                         <option value="Service Provider">Service Provider</option>
                     </select>
-                    <select name="s_ptype" id="s_ptype">
+                </p>
+                <p>
+                    <label for="pr_sv">Product/Service:</label>
+                    <select name="pr_sv" id="pr_sv">
                         <option value="Vagitable">Vagitable</option>                        
                         <option value="Grain">Grain</option>
                         <option value="Office Materials">Office Materials</option>
@@ -32,11 +39,22 @@
                         <option value="Electronics">Electronics</option>
                         <option value="Garage">Garage</option>
                     </select>
-                </p> 
-                <p>
-                    <label for="scity">Shop Name:</label>
-                    <input type="text" id="scity"  name="scity" placeholder="City">
                 </p>
+                <p>
+                    <label for="scity">City:</label>
+                    <select name="scity" id="scity">
+                        <option value="Addis Ababa">Addis Ababa</option>
+                        <option value="Dire Dawa">Dire Dawa</option>
+                        <option value="Hawassa">Hawassa</option>
+                        <option value="Bahir Dar">Bahir Dar</option>
+                        <option value="Semera">Semera</option>
+                        <option value="Asosa">Asosa</option>
+                        <option value="Gambella">Gambella</option>
+                        <option value="Mekele">Mekele</option>
+                        <option value="Harar">Harar</option>
+                        <option value="Gigjiga">Gigjiga</option>
+                    </select>
+                </p>     
                 <p class="input_last">
                     <label for="rlocation">Location:</label>
                     <input type="text" id="rlocation"  name="rlocation" placeholder="Location">

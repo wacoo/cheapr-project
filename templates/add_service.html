@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{% block title %} Service Registration {% endblock %}</h1>
+<section class="container">    
+    <div class="cat">
+        <div class="reg">
+            <form action="/api/v1/add/service" method="post">
+                <p>
+                    <label for="sname">Sevice Name:</label>
+                    <input type="text" id="sname"  name="sname" placeholder="Sevice Name">
+                </p>                
+                <p>
+                    <label for="scategory">Category:</label>
+                    <select name="scategory" id="scategory">
+                        <option value="Legal Service">Legal Service</option>                        
+                        <option value="Cleaning Service">Cleaning Service</option>
+                        <option value="Maitenance Service">Maitenance Service</option>
+                        <option value="Transport Service">Transport Service</option>
+                        <option value="Labour Service">Labour Service</option>
+                        <option value="Education Service">Education Service</option>
+                        <option value="Security Service">Security Service</option>
+                        <option value="Broker Service">Broker Service</option>
+                        <option value="Housing Service">Housing Service</option>
+                        <option value="Dining Service">Dining Service</option>
+                        <option value="Delivery Service">Delivery Service</option>
+                    </select>
+                </p>            
+                <p>
+                    <label for="sprice">Unit Price:</label>
+                    <input type="text" id="sprice"  name="sprice" placeholder="Unit Price">
+                </p>
+                <p>
+                    <label for="sprovider">Service Provider:</label>
+                    <input type="text" id="sprovider"  name="sprovider" placeholder="Provider"> 
+                </p>
+                <div>
+                    <p class="input_last">
+                        <button type="submit" id="submit">Submit</button>
+                    </p>
+                </div> 
+            </form>  
+        </div>
+    </div>
+</section>  
+{% endblock %}

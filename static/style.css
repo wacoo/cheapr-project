@@ -157,7 +157,7 @@ section{
 /* .cat register grey area */
 .cat{
     width: 100%;
-    height: 640px;
+    min-height: 20%;
     background-color: rgba(5, 5, 5, 0.363);
     display: flex;
     justify-content: center;
@@ -245,7 +245,7 @@ form input, form select{
     color: #333; 
 }
 .reg form {
-    position: relative;
+    position: relative;    
 }
 .reg form input {
     height: 23px;
@@ -271,13 +271,13 @@ form input, form select{
 .input_last{
     display: block;
     margin-top: 30px;
-    text-align: left;    
+    text-align: left;
 }
 form div{
     margin-top: 30px;
     position: absolute;
     right: 40px;
-    bottom: -20px;
+    bottom: -10px;    
 }
 
 .reg form p select {
@@ -313,6 +313,7 @@ form select{
     background-color: lightblue;
     margin: 40px;
     border-radius: 10px;
+    margin-bottom: 30px;
 }
  .reg {
     width: 50%;
@@ -320,7 +321,8 @@ form select{
     margin: 40px;
     border-radius: 10px;
     font-size: 15px;
-    font-weight: 400;    
+    font-weight: 400; 
+    padding-bottom: 30px;   
  }
  .reg form select{
     width: 21vw;

@@ -5,6 +5,10 @@ from models.base import Base
 class ProductService(Base):
     name = ""
     brand = ""
+    model = ""
+    category = ""
+    manufature_date = ""
+    status = ""
     quality = ""
     price = ""
     shop = ""
