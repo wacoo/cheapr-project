@@ -348,3 +348,16 @@ form select{
 td {
     margin-right: 10px;
 }
+/* status */
+
+.reg #status_fail, .reg #status_suc{
+    display: flex;
+    margin-right: 20px;
+    margin-left: 20px;
+    font-size: 20px;
+    display: none; 
+}
+.reg #status_fail em, .reg #status_suc em{
+    margin-top: 20px;
+    margin-left: 20px;
+}

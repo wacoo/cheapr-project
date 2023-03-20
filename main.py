@@ -3,7 +3,7 @@ from models.user import User
 from models.promotion import Promotion
 from models.base import Base
 from models.shop import Shop
-from models.product_service import ProductService
+from models.product import ProductService
 
 
 if __name__ == "__main__":

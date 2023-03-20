@@ -3,29 +3,34 @@
 from models.user import User
 from models.promotion import Promotion
 from models.shop import Shop
-from models.product_service import ProductService
-
+from models.product import Product
+from models.service import Service
 import json
 
 class Storage:
     """ file storage class """
     __filepath = "chepr_file.json"
     __objects = {}
-    clss = ['User', 'ProductService', 'Shop', 'Promition']
+    clss = ['User', 'Product', 'Service', 'Shop', 'Promition']
     def __init__(self):
         """ init storage class """
         
     
     def new(self, obj):
-        """ add new object """        
-        if obj.__dict__["__class__"] == "User":  # unique          
+        """ add new object """
+        #try: 
+        if obj.__dict__["__class__"] == "User":
             for ob in self.all().values():
-                if (ob.__dict__["username"] == obj.__dict__["username"]):
-                    return False
+                if ob.__dict__["username"]:
+                    if ob.__dict__["username"] == obj.__dict__["username"]:
+                        return False
         Storage.__objects[obj.__class__.__name__ + "." + obj.id] = obj        
         self.save()
         return True
+        #except Exception as e:
+        #    print(e)   
 
+    #             self.get(type, )
     def save(self):
         """ save object to file"""
         list_of_obj_attrib = {}
@@ -62,12 +67,28 @@ class Storage:
 
     def get(self, cls, id):
         """ return an object requested """
-        if cls in Storage.clss:
-            ob_id = cls + "." + id
+        lst = []
+        if cls in Storage.clss and id:
+            ob_id = cls + "." + id            
             for key, val in Storage.__objects.items():
                 if key == ob_id:
                     return val
+        elif cls in Storage.clss and not id:
+            for key, val in Storage.__objects.items():
+                if cls == val.__dict__['__class__']:
+                    lst.append(val.__dict__['name'])
         return None
+    
+    def getby(self, cls):
+        """ return list of same class """
+        lst = [];
+        if cls in Storage.clss:
+            for val in Storage.__objects.values():
+                if cls == val.__dict__['__class__']:
+                    lst.append(val.__dict__['name'])
+            return lst
+        else:
+            return None
 
     def count(self, cls=None):
         """ counts the number of objects """

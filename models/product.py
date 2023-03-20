@@ -2,7 +2,7 @@
 """ create product or service class"""
 from models.base import Base
 
-class ProductService(Base):
+class Product(Base):
     name = ""
     brand = ""
     model = ""

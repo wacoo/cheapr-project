@@ -5,9 +5,9 @@
 <section class="container">    
     <div class="cat">
         <div class="reg">
-            <form action="/api/v1/add/product" method="post">
+            <form action="" id="add_product">
                 <p>
-                    <label for="pname">Shop Owner:</label>
+                    <label for="pname">Product:</label>
                     <input type="text" id="pname"  name="pname" placeholder="Product Name">
                 </p>
                 <p>
@@ -20,11 +20,24 @@
                 </p>
                 <p>
                     <label for="pcategory">Category:</label>
-                    <input type="text" id="pcategory"  name="pcategory" placeholder="Category">
+                    <select name="pcategory" id="pcategory">
+                        <option value="Electornics">Electornics</option>                        
+                        <option value="Machinary">Machinary</option>
+                        <option value="Vehicle">Vehicle</option>
+                        <option value="Clothing">Clothing</option>
+                        <option value="Furniture">Furniture</option>
+                        <option value="Building">Building</option>
+                        <option value="Spare Part">Spare Part</option>
+                        <option value="Art">Art</option>
+                        <option value="Construction Material">Construction Material</option>
+                        <option value="Electric Material">Electric Material</option>
+                        <option value="Musical Instrument">Musical Instrument</option>
+                        <option value="Food and Begerage">Food and Begerage</option>
+                    </select>
                 </p>
                 <p>
                     <label for="pmdate">Manufature Date:</label>
-                    <input type="text" id="pmdate"  name="pmdate" placeholder="Man. Date">
+                    <input type="date" id="pmdate"  name="pmdate" placeholder="Man. Date">
                 </p>                
                 <p>
                     <label for="pstatus">Status:</label>
@@ -47,14 +60,23 @@
                 </p>
                 <p>
                     <label for="pshop">Seller:</label>
-                    <input type="text" id="pshop"  name="pshop" placeholder="Shop"> 
+                    <select name="pshop" id="pshop">
+                    </select> 
                 </p>
                 <div>
                     <p class="input_last">
                         <button type="submit" id="submit">Submit</button>
                     </p>
                 </div> 
-            </form>  
+            </form>
+            <div id="status_suc">
+                <img src="/static/images/success.png" alt="success icon" width="50px">
+                <em>Registration Success!</em> 
+            </div>
+            <div id="status_fail">
+                <img src="/static/images/error.png" alt="success icon" width="50px">
+                <em>Registration Filure!</em> 
+            </div> 
         </div>
     </div>
 </section>  

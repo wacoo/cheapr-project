@@ -5,7 +5,7 @@
 <section class="container">    
     <div class="cat">
         <div class="reg">
-            <form action="/api/v1/add/user" method="post">
+            <form action="" id = "add_user">
                 <p>
                 <label for="rfamer">First Name:</label>
                 <input type="text" id="rfname"  name="rfname" placeholder="First Name">
@@ -58,14 +58,22 @@
                     <label for="rlocation">Location:</label>
                     <input type="text" id="rlocation"  name="rlocation" placeholder="Location">
                     <button type="button" id="get_gps">Get Loc.</button>
-                </p>
-                <div>
-                    <p class="input_last">
+                </p>                
+                <div>                    
+                    <p class="input_last">                        
                         <button type="submit" id="submit">Submit</button>
                     </p>
                 </div> 
-            </form>  
+            </form>
+            <div id="status_suc">
+                <img src="/static/images/success.png" alt="success icon" width="50px">
+                <em>Registration Success!</em> 
+            </div>
+            <div id="status_fail">
+                <img src="/static/images/error.png" alt="success icon" width="50px">
+                <em>Registration Filure!</em> 
+            </div>  
         </div>
     </div>
-</section>  
+</section>
 {% endblock %}

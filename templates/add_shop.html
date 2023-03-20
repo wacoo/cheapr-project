@@ -5,7 +5,7 @@
 <section class="container">    
     <div class="cat">
         <div class="reg">
-            <form action="/api/v1/add/shop" method="post">
+            <form action="" id = "add_shop">
                 <p>
                     <label for="sowner">Shop Owner:</label>
                     <input type="text" id="sowner"  name="sowner" placeholder="Shop Owner">
@@ -65,7 +65,15 @@
                         <button type="submit" id="submit">Submit</button>
                     </p>
                 </div> 
-            </form>  
+            </form>
+            <div id="status_suc">
+                <img src="/static/images/success.png" alt="success icon" width="50px">
+                <em>Registration Success!</em> 
+            </div>
+            <div id="status_fail">
+                <img src="/static/images/error.png" alt="success icon" width="50px">
+                <em>Registration Filure!</em> 
+            </div> 
         </div>
     </div>
 </section>  

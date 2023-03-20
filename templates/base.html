@@ -56,11 +56,13 @@
         </form>
     </div>  
     {% block content%}        
-        <h1>{% block tit %} Title {% endblock%}</h1>              
-    {% endblock %}          
+        <h1>{% block tit %} Title {% endblock%}</h1>             
+    {% endblock %}
+    
     <footer>
 
     </footer>
+    <script src="{{url_for('static', filename='data.js')}}"></script>
     <script src="{{url_for('static', filename='script.js')}}"></script>
 </body>
 </html>

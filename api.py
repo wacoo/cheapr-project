@@ -1,17 +1,12 @@
-from flask import Blueprint, jsonify, request, url_for
+from flask import Blueprint, jsonify, request, url_for, make_response, abort
 from models.engine.file_storage import Storage
-from models.product_service import ProductService
+from models.product import Product
 from models.shop import Shop
 from models.user import User
+import json
 
 api = Blueprint(__name__, "api")
 storage = Storage()
-
-@api.errorhandler(404)
-def page_not_found(e):
-    res = jsonify({'status': 404, 'error': 'not found'})
-    res.status_code = 404
-    return res
 
 """ GET """
 @api.route("/", methods=["GET"], strict_slashes=False)
@@ -29,8 +24,12 @@ def get():
     cls = request.args.get("cls")
     id = request.args.get("id")
     storage.reload()
-    data = storage.get(cls, id)    
-    return jsonify(data.__dict__)
+    if id: 
+        data = storage.get(cls, id)    
+        return jsonify(data.__dict__)
+    else:
+        data = storage.getby(cls)
+        return jsonify(data)
 
 @api.route("/count", methods=["GET"], strict_slashes=False)
 @api.route("/count/<cls>", methods=["GET"], strict_slashes=False)
@@ -63,18 +62,20 @@ def delete(uname=None):
     return jsonify({"result": "not deleted"})
 
 """ POST """
-@api.route("/add/user", methods=["GET", "POST"])
+@api.route("/add/user", methods=["POST"])
 def add_user():
-    """ add new user """
-    fname = request.form.get("rfname")
-    mname = request.form.get("rmname")
-    lname = request.form.get("rlname")
-    uname = request.form.get("runame")
-    passwd = request.form.get("rpwd")
-    cpasswd = request.form.get("rcpwd")
-    city = request.form.get("rcity")
-    utype = request.form.get("rtype")
-    gps = request.form.get("rlocation")
+    data = request.get_json()
+    """ add new user """ 
+
+    fname = data['rfname']
+    mname = data["rmname"]
+    lname = data["rlname"]
+    uname = data["runame"]
+    passwd = data["rpwd"]
+    cpasswd = data["rcpwd"]
+    city = data["rcity"]
+    utype = data["rtype"]
+    gps = data["rlocation"]
 
     if passwd == cpasswd and passwd:
         user = User()
@@ -84,22 +85,26 @@ def add_user():
         user.username = uname
         user.password = passwd
         user.city = city
+        user.usertype = utype
         user.location = gps
         user.active = True
         storage.reload()
-        storage.new(user)
-        return user.id
-    else:
-        return "Failed!"
+        if storage.new(user):
+            return make_response(jsonify({'user id': user.id}), 200)
+        else:
+            return make_response(jsonify({'status': 'error'}), 500)
+    '''else:
+        return make_response(jsonify({'status': 'user.id'}), 400)'''
 
-@api.route("/add/shop", methods=["GET", "POST"])
+@api.route("/add/shop", methods=["POST"])
 def add_shop():
-    owner = request.form.get("sowner")
-    shop = request.form.get("sname")
-    type = request.form.get("stype")
-    product_service = request.form.get("pr_sv") # TODO get this form db
-    city = request.form.get("scity")
-    gps = request.form.get("rlocation")
+    data = request.get_json()
+    owner = data["sowner"]
+    shop = data["sname"]
+    type = data["stype"]
+    product_service = data["pr_sv"] # TODO get this form db
+    city = data["scity"]
+    gps = data["rlocation"]
     shop1 = Shop()
     shop1.owner = owner
     shop1.name = shop
@@ -108,22 +113,26 @@ def add_shop():
     shop1.city = city
     shop1.gps_location = gps
     storage.reload()
-    storage.new(shop1)
-    return shop1.id #owner +", "+ shop +", " + type  +", " + product_service +", " + city  +", " + gps
-    
+    if storage.new(shop1):
+        return make_response(jsonify({'user id': shop1.id}), 200)
+    else:
+        return make_response(jsonify({'status': 'error'}), 500) #owner +", "+ shop +", " + type  +", " + product_service +", " + city  +", " + gps
 
-@api.route("/add/product", methods=["GET", "POST"])
+    #return make_response(jsonify({'user id': data}), 200)
+
+@api.route("/add/product", methods=["POST"])
 def add_product():
-    name = request.form.get("pname")
-    brand = request.form.get("pbrand")
-    model = request.form.get("pmodel")
-    category = request.form.get("pcategory")
-    man_date = request.form.get("pmdate")
-    status = request.form.get("pstatus")
-    quality = request.form.get("pquality")
-    price = request.form.get("pprice")
-    shop = request.form.get("pshop")
-    product = ProductService()
+    data = request.get_json()
+    name = data["pname"]
+    brand = data["pbrand"]
+    model = data["pmodel"]
+    category = data["pcategory"]
+    man_date = data["pmdate"]
+    status = data["pstatus"]
+    quality = data["pquality"]
+    price = data["pprice"]
+    shop = data["pshop"]
+    product = Product()
     product.name = name
     product.brand = brand
     product.model = model
@@ -133,10 +142,12 @@ def add_product():
     product.quality = quality
     product.price = price
     product.shop = shop
-
     storage.reload()
     storage.new(product)
-    return product.id
+    if storage.new(product):
+        return make_response(jsonify({'user id': product.id}), 200)
+    else:
+        return make_response(jsonify({'status': 'error'}), 500)
 
     return
 
