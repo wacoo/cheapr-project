@@ -12,3 +12,4 @@ class Product(Base):
     quality = ""
     price = ""
     shop = ""
+    photo = ""

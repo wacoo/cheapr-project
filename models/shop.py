@@ -10,3 +10,4 @@ class Shop(Base):
     product_service = ""
     gps_location = ""
     city = ""
+    photo = ""

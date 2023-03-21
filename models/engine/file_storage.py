@@ -21,7 +21,7 @@ class Storage:
         #try: 
         if obj.__dict__["__class__"] == "User":
             for ob in self.all().values():
-                if ob.__dict__["username"]:
+                if ob.__dict__["__class__"] == "User":
                     if ob.__dict__["username"] == obj.__dict__["username"]:
                         return False
         Storage.__objects[obj.__class__.__name__ + "." + obj.id] = obj        

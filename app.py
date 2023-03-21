@@ -1,11 +1,19 @@
-from flask import Flask, make_response, jsonify
+from flask import Flask, make_response, jsonify, current_app
 from views import views
 from api import api
+import os
+
 app = Flask(__name__)
-app.url_map.strict_slashes =True
 app.register_blueprint(views, url_prefix="/views")
 app.register_blueprint(api, url_prefix="/api/v1")
+app.url_map.strict_slashes =True
 
+UPLOAD_FOLDER = 'static/images/upload'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024 * 1024
+
+with app.app_context():
+    print (current_app.name)
 @app.errorhandler(404)
 def not_found(e):
     return make_response(jsonify({'status': 'Not found'}), 404)
@@ -16,7 +24,7 @@ def bad_req(e):
 
 @app.errorhandler(500)
 def server_error(e):
-    return make_response(jsonify({'status': 'Server error'}), 500)
+    return make_response(jsonify({'status': 'Server error'}), 500)  
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True)   

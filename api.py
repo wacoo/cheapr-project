@@ -1,13 +1,25 @@
-from flask import Blueprint, jsonify, request, url_for, make_response, abort
+from flask import Blueprint, jsonify, request, make_response, abort, current_app
 from models.engine.file_storage import Storage
 from models.product import Product
+from models.service import Service
 from models.shop import Shop
 from models.user import User
-import json
+#from app import app
+from werkzeug.utils import secure_filename
+import os
 
 api = Blueprint(__name__, "api")
 storage = Storage()
-
+UPLOAD_FOLDER = 'static/images/upload'
+ALLOWED_EXTENSIONS = {'jpg', 'png', 'jpeg', 'gif'}
+def allowed_file(filename):
+    """ check file extension """
+    sp = filename.split('.').lower()
+    if sp[1] in ALLOWED_EXTENSIONS:
+        return True
+    else:
+        return False  
+    
 """ GET """
 @api.route("/", methods=["GET"], strict_slashes=False)
 def all():
@@ -70,12 +82,13 @@ def add_user():
     fname = data['rfname']
     mname = data["rmname"]
     lname = data["rlname"]
-    uname = data["runame"]
+    uname = data["rusname"]
     passwd = data["rpwd"]
     cpasswd = data["rcpwd"]
     city = data["rcity"]
     utype = data["rtype"]
     gps = data["rlocation"]
+    photo = data["pphoto_name"]
 
     if passwd == cpasswd and passwd:
         user = User()
@@ -88,13 +101,14 @@ def add_user():
         user.usertype = utype
         user.location = gps
         user.active = True
+        user.photo = photo
         storage.reload()
         if storage.new(user):
             return make_response(jsonify({'user id': user.id}), 200)
         else:
             return make_response(jsonify({'status': 'error'}), 500)
-    '''else:
-        return make_response(jsonify({'status': 'user.id'}), 400)'''
+    else:
+        return make_response(jsonify({'status': 'user.id'}), 400)
 
 @api.route("/add/shop", methods=["POST"])
 def add_shop():
@@ -105,6 +119,8 @@ def add_shop():
     product_service = data["pr_sv"] # TODO get this form db
     city = data["scity"]
     gps = data["rlocation"]
+    photo = data["pphoto_name"]
+
     shop1 = Shop()
     shop1.owner = owner
     shop1.name = shop
@@ -112,6 +128,7 @@ def add_shop():
     shop1.product_service = product_service
     shop1.city = city
     shop1.gps_location = gps
+    shop1.photo = photo
     storage.reload()
     if storage.new(shop1):
         return make_response(jsonify({'user id': shop1.id}), 200)
@@ -120,9 +137,21 @@ def add_shop():
 
     #return make_response(jsonify({'user id': data}), 200)
 
+@api.route("/add/photo", methods=["POST"])
+def add_photo():
+    if 'pphoto' not in request.files:
+        return make_response(jsonify({'message': 'No file part in request'}), 400)
+    photo = request.files["pphoto"]
+    if photo.filename == '':
+        return make_response(jsonify({'message': 'No file file selected for upload'}), 400)
+    if photo: #and allowed_file(photo.filename):
+        filename = secure_filename(photo.filename)
+        photo.save(os.path.join(UPLOAD_FOLDER, filename))
+        return jsonify({'fn':filename});#make_response(jsonify({'status': 'upload success'}), 200);
+
 @api.route("/add/product", methods=["POST"])
 def add_product():
-    data = request.get_json()
+    data = request.get_json()    
     name = data["pname"]
     brand = data["pbrand"]
     model = data["pmodel"]
@@ -132,6 +161,8 @@ def add_product():
     quality = data["pquality"]
     price = data["pprice"]
     shop = data["pshop"]
+    photo = data["pphoto_name"]
+
     product = Product()
     product.name = name
     product.brand = brand
@@ -142,15 +173,37 @@ def add_product():
     product.quality = quality
     product.price = price
     product.shop = shop
+    product.photo = photo
     storage.reload()
     storage.new(product)
     if storage.new(product):
-        return make_response(jsonify({'user id': product.id}), 200)
+        return make_response(jsonify({'user id': data}), 200)
     else:
         return make_response(jsonify({'status': 'error'}), 500)
 
-    return
+@api.route("/add/service", methods=["POST"])
+def add_service():
+    data = request.get_json()    
+    name = data["sname"]
+    category = data["scategory"]
+    price = data["sprice"]
+    provider = data["sprovider"]
+    #TODO need quality here    
+    photo = data["pphoto_name"]
 
+    service = Service()
+    service.name = name
+    service.price =price
+    service.category = category
+    service.provider = provider
+    service.photo = photo
+    storage.reload()
+    storage.new(service)
+    if storage.new(service):
+        return make_response(jsonify({'user id': data}), 200)
+    else:
+        return make_response(jsonify({'status': 'error'}), 500)
+    
 @api.route("/add/promotion", methods=["GET", "POST"])
 def add_promotion():
     return

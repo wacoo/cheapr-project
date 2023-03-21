@@ -12,4 +12,5 @@ class User(Base):
     location = ""
     usertype= ""
     active= False
+    photo = ""
     
