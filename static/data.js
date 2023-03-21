@@ -33,23 +33,24 @@ function uploadPhoto() {
 
 function postPhoto(url){
     let data = new FormData();
-    fileName = photoInput.files[0].name
-    
-    data.append('pphoto', photoInput.files[0]);
-    data.append('name', fileName);
-    console.log(data.get('files'))
-    fetch(url, {
-        method: "POST",
-        body: data,
-    })
-    .then(function(res){
-        return res.json()
-    })
-    .then(function(res){
-        console.log('success')
-        console.log(res)
-        console.log('complete')
-    })
+    if (photoInput.files[0]){
+        fileName = photoInput.files[0].name;   
+        data.append('pphoto', photoInput.files[0]);
+        data.append('name', fileName);
+        console.log(data.get('files'))
+        fetch(url, {
+            method: "POST",
+            body: data,
+        })
+        .then(function(res){
+            return res.json()
+        })
+        .then(function(res){
+            console.log('success')
+            console.log(res)
+            console.log('complete')
+        })
+    }
 
 }
 
@@ -77,21 +78,24 @@ function submitForm(i, url) {
     if (listOfForms[i]) {
         listOfForms[i].addEventListener('submit', async function (e) {
             e.preventDefault();
-            let picname = document.createElement('input');
+            /*let picname = document.createElement('input');
             picname.type = 'text';
             picname.value = fileName;
             picname.name = 'pphoto_name';
-            picname.id = 'pphoto_name';
-            listOfForms[i].appendChild(picname); //create temp input text to get image name
-            let frmdata = new FormData(listOfForms[i]).entries();            
+            picname.id = 'pphoto_name';*/
+            //listOfForms[i].appendChild(picname); //create temp input text to get image name
+            let frmdata = new FormData(listOfForms[i]);
+            frmdata.set('pphoto_name', fileName);
+            let data = frmdata.entries();          
             console.log("JS " + fileName);
-            //frmdata.append('pphoto', fileName)
+            
             const res = await fetch(url, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(Object.fromEntries(frmdata))
+                body: JSON.stringify(Object.fromEntries(data))
             });
-            listOfForms[i].removeChild(picname);
+            //listOfForms[i].removeChild(picname);
+            fileName = "";
             const result = await res.json();
             if (res.status === 200) {
                 suc_mes.style.display = "flex";
