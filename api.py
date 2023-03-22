@@ -33,6 +33,7 @@ def all():
 
 @api.route("/get/", methods=["GET"], strict_slashes=False)
 def get():
+    """ get objects with class only or class and id"""
     cls = request.args.get("cls")
     id = request.args.get("id")
     storage.reload()
@@ -42,6 +43,17 @@ def get():
     else:
         data = storage.getby(cls)
         return jsonify(data)
+    
+@api.route("/get/name", methods=["GET"], strict_slashes=False)
+def get_name():
+    """ get list of product/service/shop names """
+    lst = []
+    cls = request.args.get("cls")
+    storage.reload()    
+    data = storage.getby(cls)
+    for d in data:
+        lst.append(d['name'])
+    return jsonify(lst)
 
 @api.route("/count", methods=["GET"], strict_slashes=False)
 @api.route("/count/<cls>", methods=["GET"], strict_slashes=False)
@@ -59,6 +71,43 @@ def count(cls=None):
         for key in all.keys():
             count += 1
     return jsonify({"count": count})
+
+@api.route("/shops", methods=["GET"])
+def get_cheapest_shops():
+    """ returns shops with the cheapest products/services """
+    storage.reload()
+    products = storage.getby("Product")
+
+    # get cheapest products
+    product_price = {}
+    for prod in products:
+        product_price[prod['brand'] +"_"+ prod['model'] +"_"+ prod['status'] +"_"+ prod['quality'] +"/::"+ prod['shop']] = prod['price']
+    product = {}
+    changedProduct = False #flag
+    fProduct =""    
+    count = 0 
+    item = {}   
+    for key, val in product_price.items():        
+        p = key.split('/::')                
+        if not changedProduct:
+            fProduct= p[0]
+            changedProduct = True
+        if p[0] in fProduct:
+            item[key] = int(val)
+            product[fProduct] = item
+            changedProduct = False
+        else:         
+            fProduct=p[0]
+            count += 1
+            item[key] = int(val)
+            product[fProduct] = item
+            
+    print(item)
+    return product
+    
+    #service = storage.getby("Service")
+    #storage.getby("Shop")
+
 
 """ DELETE """
 @api.route("/del/<uname>", methods=["GET", "DELETE"])

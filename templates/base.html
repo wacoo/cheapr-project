@@ -20,13 +20,53 @@
         <div class="logo">
             <img src="/static/images/cheapr logo.png" alt="Cheaper logo" width="150px">
         </div>
-        <div class="menu">
+        <div class="navbar">
+            <a href="/views/" class="{{cls_home}}">Home</a>
+            <div class="subnav">
+              <button class="subnavbtn">Shops <i class="fa fa-caret-down"></i></button>
+              <div class="subnav-content">
+                <a href="/views/add_shop">New Shop</a>
+                <a href="/views/shops">Shops</a>
+              </div>
+            </div>
+            <div class="subnav">
+              <button class="subnavbtn">Products <i class="fa fa-caret-down"></i></button>
+              <div class="subnav-content">
+                <a href="/views/add_product">New Product</a>
+                <a href="/views/add_product">Change detail</a>
+                <a href="/views/goods">Products</a>
+              </div>
+            </div>
+            <div class="subnav">
+              <button class="subnavbtn"> Services <i class="fa fa-caret-down"></i></button>
+              <div class="subnav-content">
+                <a href="/views/add_service">New Service</a>
+                <a href="/views/add_service">Change detail</a>
+                <a href="/views/services">Services</a>
+              </div>
+            </div>
+            <div class="subnav">
+                <button class="subnavbtn"> Login <i class="fa fa-caret-down"></i></button>
+                <div class="subnav-content">
+                  <a href="/views/add_service">Register</a>
+                  <a href="/views/add_service">Change detail</a>
+                  <a href="/views/login">Login</a>
+                </div>
+              </div>
+          </div>
+        <!-- <div class="menu">
             <a class = "{{cls_home}}" href="/views/">Home</a>
-            <a class = "{{cls_shop}}" href="/views/shops">Shops</a>
-            <a class = "{{cls_good}}" href="/views/goods">Goods</a>
-            <a class = "{{cls_serv}}" href="/views/services">Services</a>
+            <a class = "{{cls_shop}}" href="/views/shops">Shops  <i class="fa fa-caret-down"></i></a>
+            <a class = "{{cls_good}}" href="/views/goods">Goods  <i class="fa fa-caret-down"></i></a>
+            <a class = "{{cls_serv}}" href="/views/services">Services  <i class="fa fa-caret-down"></i></a>
             <a class = "{{cls_promo}}" href="/views/promos">Promotions</a>
-        </div>        
+            <a class = "{{cls_promo}}" href="/views/login">Login  <i class="fa fa-caret-down"></i></a>            
+        </div>
+        <div class="sub_menu">
+            <a href="/views/login">Login</a>
+            <a href="/views/profile">User Profile</a>
+            <a href="/views/login">Register</a>
+        </div>        -->
     </header>
     <div class="filter">
         <form action="">
@@ -62,7 +102,7 @@
     <footer>
 
     </footer>
-    <script src="{{url_for('static', filename='data.js')}}"></script>
-    <script src="{{url_for('static', filename='script.js')}}"></script>
+    <script src="{{url_for('static', filename='JS/data.js')}}"></script>
+    <script src="{{url_for('static', filename='JS/script.js')}}"></script>
 </body>
 </html>

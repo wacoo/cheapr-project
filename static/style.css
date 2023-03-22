@@ -16,6 +16,27 @@ header{
     display: flex;
     border-bottom: lightblue solid 5px;
 }
+/* .sub_menu{
+    width: 97px;
+    height: 100px;
+    background-color: #ddd;
+    position: absolute;
+    bottom: -32px;
+    right: 25px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.sub_menu a {
+    color: #333;
+    text-decoration: none;
+    display: block;
+    padding-top: 10px;
+}
+.sub_menu a:hover{
+    background-color: #333;
+    color:#ddd;
+    border: #333 solid 1px;
+} */
 section{
     /* color: aliceblue; */
     font-size: 25px;
@@ -27,35 +48,76 @@ section{
     margin: 0;
     margin-top: 30px;
 }
-/* .search{
-    padding-left: 5vw;
-    padding-top: 1vw;
-    padding-bottom: 30px;
-    padding-top: 70px;
-} */
- 
-/* .search button {
-    width:8vw;
-    height: 28vw;
-    border-radius:7px;
-    background-color: #04AA6D;
-    border:#04AA6D solid 1px;
+/* nav bar */
+.navbar {
+    /* overflow: hidden; */
+    background-color: #333;
+    position: absolute;
+    right: 40px;
+    border-radius: 5px;
+  }
+  
+  .navbar a {
+    float: left;
+    font-size: 16px;
     color: white;
-    font-size: 25px;
-    margin-left: 10px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-.search button:hover{
+    text-align: center;
+    padding: 14px 30px;
+    text-decoration: none;
+  }
+  
+  .subnav {    
+    float: left;
+    overflow: hidden;    
+  }
+  
+  .subnav .subnavbtn {
+    font-size: 14px;  
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;    
+  }
+  
+  .navbar a:hover, .subnav:hover .subnavbtn{
+    background-color:#ddd;
+    color: #333;
+  }
+  
+  .subnav-content {
+    display: none;
+    position: absolute;
+    right: 0;
     background-color: #ddd;
-    color:black;
-} */
-/* menu */
-.menu{    
+    color: #333;
+    width: 100%;
+    z-index: 1;    
+  }
+  
+  .subnav-content a {
+    float: left;
+    color: #333;
+    background-color: #ddd;
+    text-decoration: none;
+  }
+  
+  .subnav-content a:hover {
+    background-color: #333;
+    color: #ddd;
+  }
+  
+  .subnav:hover .subnav-content {
+    display: block;
+  }
+/* .menu{
     margin-top: 30px;
     overflow: hidden;
     background-color: #333;
     height: 40px;
-    /* width: max-content; */
+    /* width: max-content; 
     line-height: 40px;
     border-radius: 8px;
     position: absolute;
@@ -75,7 +137,7 @@ section{
 .menu a.active{
     background-color: #04AA6D;
     color: white;
-}
+} */
 
 /* Promo */
 .promo{
@@ -193,11 +255,13 @@ section{
     margin-bottom: 3px;
 }
 /* Footer Table */
-.tbl_list{
-   display: flex; 
+div.tbl_list{
+   display: flex;
+   font-size: 15px;
+   color: #ddd;
 }
 .tbl_shops, .tbl_goods, .tbl_services{
-    padding-right: 50px;
+    padding-right: 50px;    
 }
 td{
     padding-right: 20px;
@@ -340,7 +404,7 @@ form select{
     display: table-cell;
  }
  td {
-    color: rgb(77, 72, 78);
+    color: white;
     padding-top: 20px;
     padding-right: 20px;
     padding-left: 40px;

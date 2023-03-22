@@ -85,7 +85,7 @@ class Storage:
         if cls in Storage.clss:
             for val in Storage.__objects.values():
                 if cls == val.__dict__['__class__']:
-                    lst.append(val.__dict__['name'])
+                    lst.append(val.__dict__)
             return lst
         else:
             return None

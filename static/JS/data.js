@@ -111,10 +111,12 @@ function submitForm(i, url) {
 }
 
 if (shoplist) {
-    shoplist.addEventListener('hover', getAllShopName('http://localhost:5000/api/v1/get', "Product"));
+    console.log("Here");
+    shoplist.addEventListener('hover', getAllShopName('http://localhost:5000/api/v1/get/name', "Product"));
 }
+console.log("Not Here");
 if (proiderlist) {
-    proiderlist.addEventListener('hover', getAllShopName('http://localhost:5000/api/v1/get', "Service"));
+    proiderlist.addEventListener('hover', getAllShopName('http://localhost:5000/api/v1/get/name', "Service"));
 }
 
 async function getAllShopName(url, cls) {
