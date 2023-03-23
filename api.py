@@ -74,41 +74,41 @@ def count(cls=None):
 
 @api.route("/shops", methods=["GET"])
 def get_cheapest_shops():
+    """ returns shops with the cheapest products/services 
+    
+    TODO finish the logic first before integration """
+    storage.reload()
+    products = storage.getby("Product")
+
+    # get cheapest shop, product, price
+
+    min_price = min(products, key=lambda x:x['price'])
+    return min_price 
+
+@api.route("/products", methods=["GET"])
+def get_cheapest_products():
     """ returns shops with the cheapest products/services """
     storage.reload()
     products = storage.getby("Product")
 
     # get cheapest products
+    fProduct = []
     product_price = {}
+    price = 0
     for prod in products:
         product_price[prod['brand'] +"_"+ prod['model'] +"_"+ prod['status'] +"_"+ prod['quality'] +"/::"+ prod['shop']] = prod['price']
+        name = prod['brand'] +"_"+ prod['model'] +"_"+ prod['status'] +"_"+ prod['quality']
+        if name not in fProduct:
+            fProduct.append(name)
     product = {}
-    changedProduct = False #flag
-    fProduct =""    
-    count = 0 
-    item = {}   
-    for key, val in product_price.items():        
-        p = key.split('/::')                
-        if not changedProduct:
-            fProduct= p[0]
-            changedProduct = True
-        if p[0] in fProduct:
-            item[key] = int(val)
-            product[fProduct] = item
-            changedProduct = False
-        else:         
-            fProduct=p[0]
-            count += 1
-            item[key] = int(val)
-            product[fProduct] = item
-            
-    print(item)
+    for pr in fProduct:
+        product[pr] = {}  
+        for key, val in product_price.items():        
+            p = key.split('/::')
+            if pr == p[0]:           
+                product[pr][key] = int(val)
+                print(product[pr])         
     return product
-    
-    #service = storage.getby("Service")
-    #storage.getby("Shop")
-
-
 """ DELETE """
 @api.route("/del/<uname>", methods=["GET", "DELETE"])
 def delete(uname=None):

@@ -372,12 +372,13 @@ form select{
     font-weight: 500;
 }
 /* table */
-.table{
+#table, #tbl, .table{
     width: 95%;
     background-color: lightblue;
     margin: 40px;
     border-radius: 10px;
     margin-bottom: 30px;
+    border-radius: 10px;
 }
  .reg {
     width: 50%;
@@ -404,13 +405,21 @@ form select{
     display: table-cell;
  }
  td {
-    color: white;
+    color: rgb(5, 5, 5);
     padding-top: 20px;
     padding-right: 20px;
     padding-left: 40px;
+    white-space: pre;
+    font-size: 20px;
  }
 td {
     margin-right: 10px;
+}
+tr:nth-child(even) {
+    background-color: #f2f2f2
+  }
+tr:nth-child(odd) {
+background-color: #9ebac3
 }
 /* status */
 

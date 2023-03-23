@@ -11,7 +11,9 @@ const proiderlist = document.getElementById('sprovider');
 const photoInput = document.getElementById('pphoto');
 const listOfForms = [addUser, addShop, addProduct, addService];
 
-photoInput.addEventListener('change', uploadPhoto);
+if (photoInput){
+    photoInput.addEventListener('change', uploadPhoto);
+}
 let j = 0;
 let u = "";
 let fileName = ""
