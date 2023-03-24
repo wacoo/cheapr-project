@@ -7,9 +7,8 @@ from models.product import Product
 
 
 if __name__ == "__main__":
-    st = Storage()
-    st.reload()
-    print(st.getby("Shop"))
+    
+    print((lambda x: x + 4)(3))
     
 
 

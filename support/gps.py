@@ -4,6 +4,13 @@ import numpy as nm
 import pandas as pd
 from math import radians, cos, sin, asin, sqrt
 import sys
+#from geopy.geocoders import Nominatim
+from urllib.request import urlopen
+import json
+def get_current_gps_coord():
+    data = json.load(urlopen("http://ipinfo.io/json"))
+    gps = data['loc']
+    return gps
 """cneter longitude, center latitude, longitude, latitude, radius in distance unit, distance unit """
 def within_a_radius(center_long, center_lat, long, lat, R, ditance_unit = 'km'):
     """ Calculates a distance between center point
@@ -37,4 +44,5 @@ AAU = '9.0335, 38.7637'
 BEMB = '9.03146, 38.78672'
 my_loc ='9.03481,38.761211'
 
-print(within_a_radius(38.761211, 9.03481, 38.78672, 9.03146, 2.5, 'km'));
+#print(within_a_radius(38.761211, 9.03481, 38.78672, 9.03146, 2.5, 'km'));
+get_current_gps_coord()

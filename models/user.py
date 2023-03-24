@@ -9,7 +9,7 @@ class User(Base):
     username = ""
     password = ""
     city = ""
-    location = ""
+    gps_location = ""
     usertype= ""
     active= False
     photo = ""
