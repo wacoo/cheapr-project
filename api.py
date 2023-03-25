@@ -139,9 +139,11 @@ def get_cheapest_products():
     usr = 'wac'
     products = storage.getby("Product")
     # get cheapest products
-    fProduct = []
+    list_of_names = []
     product_price = []    
     price = 0
+    my_gps = None
+    gp = []
     for prod in products:
         pro_pri = {}
         pro_pri['product'] = prod['brand'] +"_"+ prod['model'] +"_"+ prod['status'] +"_"+ prod['quality']
@@ -151,8 +153,8 @@ def get_cheapest_products():
         if loc:
             pro_pri['location'] = get_gps(prod['shop'], 'Shop')
             name = prod['brand'] +"_"+ prod['model'] +"_"+ prod['status'] +"_"+ prod['quality']
-            if name not in fProduct:
-                fProduct.append(name)
+            #if name not in fProduct:
+                #fProduct.append(name)
             product_price.append(pro_pri)
 
     lst_prod = product_price
@@ -167,8 +169,9 @@ def get_cheapest_products():
             loc_long = locale.atof(pgps[1])
             loc_lat = locale.atof(pgps[0])
         radius = 2 #km
-        my_gps = get_current_gps_coord()
-        gp = my_gps.split(',')
+        if not my_gps:
+            my_gps =  '9.035347598794832, 38.759589563094906'#get_current_gps_coord()
+            gp = my_gps.split(',')
         user_long = gp[1]
         user_lat = gp[0]
         if my_gps:
@@ -179,14 +182,29 @@ def get_cheapest_products():
         if gps_loc_of_shop:
             if within_a_radius(user_long, user_lat, loc_long, loc_lat, radius, 'km'):
                 near_shops.append(lst)
+                if lst['product'] not in list_of_names:
+                    list_of_names.append(lst['product'])
         
-        cheapest = get_cheapest(near_shops, count)
-    return cheapest
-def get_cheapest():
-    #TODO 
+        cheapest = get_cheapest(near_shops, list_of_names, count)
+    return cheapest#cheapest
+
+# product list, list of unique product names, number of products to return from each
+def get_cheapest(near_shops, list_names, count):    
+    list_of_names = list_names # name of each product not repeated
+    sorted_lst = []
+    all_list = []
+    for ln in list_of_names:  
+        list_of_same = []               
+        for pr in near_shops:       
+            name = pr['product']
+            if ln == name:
+                list_of_same.append(pr)
+        #all_list.append(list_of_same)
+        sorted_lst.append(sorted(list_of_same, key=lambda x:x['price']))
+    return sorted_lst
     #within_a_radius(user_long, user_lat, loc_long, loc_lat, radius1, km);
     #get_list_of_products()
-""" DELETE """
+    """ DELETE """
 @api.route("/del/<uname>", methods=["GET", "DELETE"])
 def delete(uname=None):
     """ remove object """

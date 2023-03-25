@@ -404,22 +404,35 @@ form select{
     text-align: left;
     display: table-cell;
  }
+
+ .tab{
+    width: 20%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px; 
+    border-radius: 10px;
+    table-layout: fixed;   
+ }
+ /* table.tab,tr,th,td{
+    width: 30%;
+    white-space: pre;
+ }  */
+
  td {
+    width: 300px;
     color: rgb(5, 5, 5);
     padding-top: 20px;
     padding-right: 20px;
     padding-left: 40px;
     white-space: pre;
     font-size: 20px;
- }
-td {
     margin-right: 10px;
-}
+ } 
 tr:nth-child(even) {
     background-color: #f2f2f2
   }
 tr:nth-child(odd) {
-background-color: #9ebac3
+background-color: #8ac834
 }
 /* status */
 

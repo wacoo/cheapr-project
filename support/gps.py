@@ -10,6 +10,7 @@ import json
 def get_current_gps_coord():
     data = json.load(urlopen("http://ipinfo.io/json"))
     gps = data['loc']
+    print(gps)
     return gps
 """cneter longitude, center latitude, longitude, latitude, radius in distance unit, distance unit """
 def within_a_radius(center_long, center_lat, long, lat, R, ditance_unit = 'km'):
@@ -45,4 +46,4 @@ BEMB = '9.03146, 38.78672'
 my_loc ='9.03481,38.761211'
 
 #print(within_a_radius(38.761211, 9.03481, 38.78672, 9.03146, 2.5, 'km'));
-get_current_gps_coord()
+#get_current_gps_coord()
