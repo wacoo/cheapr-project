@@ -123,7 +123,6 @@ def get_list_of_products():
 def get_gps(param, cls):
     """ return gps coordinate of an object """
     obj_dict = storage.getby(cls)
-    print("Heree")
     for obj in obj_dict:
         if cls == 'User':
             if obj['username'] == param:
@@ -134,9 +133,8 @@ def get_gps(param, cls):
             
 @api.route("/products", methods=["GET"])
 def get_cheapest_products():
-    """ returns shops with the cheapest products/services """
+    """ returns products with in a given area """
     storage.reload()
-    usr = 'wac'
     products = storage.getby("Product")
     # get cheapest products
     list_of_names = []
@@ -151,7 +149,7 @@ def get_cheapest_products():
         pro_pri['shop'] = prod['shop']
         loc = get_gps(prod['shop'], 'Shop')
         if loc:
-            pro_pri['location'] = get_gps(prod['shop'], 'Shop')
+            pro_pri['location'] = loc#get_gps(prod['shop'], 'Shop')
             name = prod['brand'] +"_"+ prod['model'] +"_"+ prod['status'] +"_"+ prod['quality']
             #if name not in fProduct:
                 #fProduct.append(name)
@@ -170,7 +168,7 @@ def get_cheapest_products():
             loc_lat = locale.atof(pgps[0])
         radius = 2 #km
         if not my_gps:
-            my_gps =  '9.035347598794832, 38.759589563094906'#get_current_gps_coord()
+            my_gps = '9.034804,38.761256'#get_current_gps_coord()
             gp = my_gps.split(',')
         user_long = gp[1]
         user_lat = gp[0]
@@ -185,22 +183,80 @@ def get_cheapest_products():
                 if lst['product'] not in list_of_names:
                     list_of_names.append(lst['product'])
         
-        cheapest = get_cheapest(near_shops, list_of_names, count)
+        cheapest = get_cheapest(near_shops, list_of_names, count, 'Product')
     return cheapest#cheapest
 
+@api.route("/services", methods=["GET"])
+def get_cheapest_services():
+    """ returns services within a given area"""
+    storage.reload()
+    services = storage.getby("Service")
+    # get cheapest products
+    list_of_names = []
+    service_price = []    
+    price = 0
+    my_gps = None
+    gp = []
+    for srv in services:
+        srv_pri = {}
+        srv_pri['service'] = srv['name'] +"_"+ srv['quality']
+        srv_pri['price'] = srv['price']
+        srv_pri['shop'] = srv['provider']
+        loc = get_gps(srv['provider'], 'Shop')
+        if loc:
+            srv_pri['location'] = loc#get_gps(srv['provider'], 'Shop')
+            name = srv['name'] +"_"+ srv['quality']
+            #if name not in fProduct:
+                #fProduct.append(name)
+            service_price.append(srv_pri)
+
+    lst_srv = service_price
+    near_shops = []
+    for lst in lst_srv:
+        gps_loc_of_shop = lst['location']
+        pgps = ""
+        loc_long = ""
+        loc_lat = ""
+        if gps_loc_of_shop:
+            pgps = gps_loc_of_shop.split(',')
+            loc_long = locale.atof(pgps[1])
+            loc_lat = locale.atof(pgps[0])
+        radius = 2 #km
+        if not my_gps:
+            my_gps = '9.034804,38.761256'#get_current_gps_coord()
+            gp = my_gps.split(',')
+        user_long = gp[1]
+        user_lat = gp[0]
+        if my_gps:
+            user_long = locale.atof(user_long)
+            user_lat = locale.atof(user_lat)
+                
+        '''check area shops within 2 kilometers'''
+        if gps_loc_of_shop:
+            if within_a_radius(user_long, user_lat, loc_long, loc_lat, radius, 'km'):
+                near_shops.append(lst)
+                if lst['service'] not in list_of_names:
+                    list_of_names.append(lst['service'])
+        
+        cheapest = get_cheapest(near_shops, list_of_names, count, 'Service')
+    return cheapest#list_of_names#near_shops#cheapest#cheapest
 # product list, list of unique product names, number of products to return from each
-def get_cheapest(near_shops, list_names, count):    
+def get_cheapest(near_shops, list_names, count, cls):    
     list_of_names = list_names # name of each product not repeated
     sorted_lst = []
     all_list = []
     for ln in list_of_names:  
         list_of_same = []               
-        for pr in near_shops:       
-            name = pr['product']
+        for pr in near_shops:
+            name = ''
+            if cls == 'Product':                   
+                name = pr['product']
+            elif cls == 'Service':
+                name = pr['service']
             if ln == name:
                 list_of_same.append(pr)
-        #all_list.append(list_of_same)
-        sorted_lst.append(sorted(list_of_same, key=lambda x:x['price']))
+        #all_list.append(list_of_same)        
+        sorted_lst.append(sorted(list_of_same, key=lambda x:float(x['price'])))
     return sorted_lst
     #within_a_radius(user_long, user_lat, loc_long, loc_lat, radius1, km);
     #get_list_of_products()
@@ -330,6 +386,7 @@ def add_service():
     data = request.get_json()    
     name = data["sname"]
     category = data["scategory"]
+    quality = data["squality"]
     price = data["sprice"]
     provider = data["sprovider"]
     #TODO need quality here    
@@ -339,6 +396,7 @@ def add_service():
     service.name = name
     service.price =price
     service.category = category
+    service.quality = quality
     service.provider = provider
     service.photo = photo
     storage.reload()

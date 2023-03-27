@@ -372,7 +372,7 @@ form select{
     font-weight: 500;
 }
 /* table */
-#table, #tbl, .table{
+#table, #tables, #tbl, .table{
     width: 95%;
     background-color: lightblue;
     margin: 40px;
@@ -409,7 +409,8 @@ form select{
     width: 20%;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 30px; 
+    margin-bottom: 30px;
+    margin-top: 30px;
     border-radius: 10px;
     table-layout: fixed;   
  }
@@ -419,7 +420,7 @@ form select{
  }  */
 
  td {
-    width: 300px;
+    width: 20vw;
     color: rgb(5, 5, 5);
     padding-top: 20px;
     padding-right: 20px;
@@ -427,12 +428,13 @@ form select{
     white-space: pre;
     font-size: 20px;
     margin-right: 10px;
+    overflow:auto;
  } 
 tr:nth-child(even) {
-    background-color: #f2f2f2
+    background-color: #eee4e4
   }
 tr:nth-child(odd) {
-background-color: #8ac834
+background-color: #c7c8c7
 }
 /* status */
 
