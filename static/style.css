@@ -208,11 +208,10 @@ section{
     min-height: 70%;
     background-color: rgb(95, 96, 95);
     display: flex;
-    justify-content: center;
-    padding-top: 30px;    
+    justify-content: center;    
     margin-bottom: 30px;
-    padding-top: 40px;
-    padding-bottom: 80px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     flex-wrap: wrap;
     border-radius: 20px;
 }
@@ -222,10 +221,9 @@ section{
     min-height: 20%;
     background-color: rgba(5, 5, 5, 0.363);
     display: flex;
-    justify-content: center;
-    padding-top: 30px;    
+    justify-content: center;   
     margin-bottom: 30px;
-    padding-top: 40px;
+    padding-top: 25px;
     padding-bottom: 30px;
     flex-wrap: wrap;
     border-radius: 20px;

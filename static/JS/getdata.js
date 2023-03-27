@@ -12,13 +12,17 @@ if (!flag) {
 }
 
 //let tbl = document.getElementById('tbl');
-let tbl_prod = document.getElementById('table');
-let tbl_serv = document.getElementById('tables');
+let tbl_prod = document.getElementById('table_good');
+let tbl_serv = document.getElementById('table_service');
+let tbl_shop = document.getElementById('table_shop');
 url = ""
 if (tbl_prod){
     url = 'http://localhost:5000/api/v1/products';
 }else if (tbl_serv){
     url = 'http://localhost:5000/api/v1/services';
+}
+else if (tbl_shop){
+    url = 'http://localhost:5000/api/v1/shops';
 }
 
 cheapestShops(url);
@@ -48,7 +52,9 @@ async function cheapestShops(url){
         }  else if (tbl_serv){
             console.log(result[i][0]);
             cellt.innerHTML = result[i][0]['service'].split('_')[0];
-        }                
+        } else if (tbl_shop){
+            cellt.innerHTML = result[i][0]['shop'].split('_')[0];
+        }              
         cell1.innerHTML = "Shop";
         cell2.innerHTML = "Product/Service";
         cell3.innerHTML = "Price";
@@ -57,7 +63,6 @@ async function cheapestShops(url){
             ///console.log(result[i][j]);
             if (tbl_prod){
                 brand = result[i][j]['product'];
-                console.log(k);
                 brand =brand.replaceAll('_', ' ');
                 shop = result[i][j]['shop'];
                 price = result[i][j]['price'];
@@ -84,6 +89,19 @@ async function cheapestShops(url){
                 cell1.innerHTML = shop;
                 cell2.innerHTML = service;
                 cell3.innerHTML = price;
+            } else if (tbl_shop){
+                brand = result[i][j]['product'] || result[i][j]['service'];
+                brand =brand.replaceAll('_', ' ');
+                shop = result[i][j]['shop'];
+                price = result[i][j]['price'];
+                //st = "Brand: " + spPr[0] + "\nModel: " + spPr[1] + "\nStatus: " + spPr[2] + "\nQuality: " + spPr[3];
+                row = head.insertRow();
+                cell1 = row.insertCell(0);
+                cell2 = row.insertCell(1);
+                cell3 = row.insertCell(2);
+                cell1.innerHTML = shop;
+                cell2.innerHTML = brand;
+                cell3.innerHTML = price;
             }
             
             k++;
@@ -93,6 +111,9 @@ async function cheapestShops(url){
         }
         else if (tbl_serv){
             tbl_serv.appendChild(tab);
+        }
+        else if (tbl_shop){
+            tbl_shop.appendChild(tab);
         }
                       
     }
