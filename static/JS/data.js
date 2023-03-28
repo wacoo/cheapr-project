@@ -5,11 +5,12 @@ const addUser = document.getElementById('add_user');
 const addShop = document.getElementById('add_shop');
 const addProduct = document.getElementById('add_product');
 const addService = document.getElementById('add_service');
+const addLogin = document.getElementById('add_login');
 const addPromotion = document.getElementById('add_promotion');
 const shoplist = document.getElementById('pshop');
 const proiderlist = document.getElementById('sprovider');
 const photoInput = document.getElementById('pphoto');
-const listOfForms = [addUser, addShop, addProduct, addService];
+const listOfForms = [addUser, addShop, addProduct, addService, addLogin];
 
 if (photoInput){
     photoInput.addEventListener('change', uploadPhoto);
@@ -59,7 +60,7 @@ function postPhoto(url){
 function getURL(i) {
     switch (i) {
         case 0:
-            url = 'http://localhost:5000/api/v1/add/user';
+            url = 'http://localhost:5000/user/signup';
             break;
         case 1:
             url = 'http://localhost:5000/api/v1/add/shop';
@@ -71,7 +72,7 @@ function getURL(i) {
             url = 'http://localhost:5000/api/v1/add/service';
             break;
         case 4:
-            url = 'http://localhost:5000/api/v1/add/promotion';
+            url = 'http://localhost:5000/user/login';
             break;
     }
     return url;
@@ -89,7 +90,7 @@ function submitForm(i, url) {
             let frmdata = new FormData(listOfForms[i]);
             frmdata.set('pphoto_name', fileName);
             let data = frmdata.entries();          
-            console.log("JS " + fileName);
+            //console.log("JS " + fileName);
             
             const res = await fetch(url, {
                 method: 'POST',
@@ -99,15 +100,28 @@ function submitForm(i, url) {
             //listOfForms[i].removeChild(picname);
             fileName = "";
             const result = await res.json();
-            if (res.status === 200) {
-                suc_mes.style.display = "flex";
-                fail_mes.style.display = "none";
-                console.log("Success");
+            if (addLogin) {
+                if (res.status === 200) {
+                    window.open('/user/user_profile');
+                    suc_mes.style.display = "flex";
+                    fail_mes.style.display = "none";
+                } else {
+                    fail_mes.style.display = "flex";
+                    suc_mes.style.display = "none";
+                }
             } else {
-                fail_mes.style.display = "flex";
-                suc_mes.style.display = "none";
-            }
-            console.log(result);
+                    if (res.status === 200) {
+                        suc_mes.style.display = "flex";
+                        fail_mes.style.display = "none";
+                        console.log("Success");
+                    } else {
+                        fail_mes.style.display = "flex";
+                        suc_mes.style.display = "none";
+                    }
+                    console.log(result);
+                }
+                    
+                    
         });
     }
 }

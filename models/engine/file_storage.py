@@ -107,6 +107,8 @@ class Storage:
         if uname:
             self.reload()
             for obj in self.all().values():
-                if uname == obj.__dict__["username"]:
-                    return obj.__dict__["password"]
+                if obj.__dict__['__class__'] == 'User':
+                    if uname == obj.__dict__["username"]:
+                        return obj.__dict__["password"]
+            return None
 
