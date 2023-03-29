@@ -10,8 +10,9 @@ const addPromotion = document.getElementById('add_promotion');
 const shoplist = document.getElementById('pshop');
 const proiderlist = document.getElementById('sprovider');
 const photoInput = document.getElementById('pphoto');
+const uname =  document.getElementById('lusname');
+const pass =  document.getElementById('lpwd');
 const listOfForms = [addUser, addShop, addProduct, addService, addLogin];
-
 if (photoInput){
     photoInput.addEventListener('change', uploadPhoto);
 }
@@ -73,6 +74,7 @@ function getURL(i) {
             break;
         case 4:
             url = 'http://localhost:5000/user/login';
+            loginGetFlag = true;
             break;
     }
     return url;
@@ -89,22 +91,38 @@ function submitForm(i, url) {
             //listOfForms[i].appendChild(picname); //create temp input text to get image name
             let frmdata = new FormData(listOfForms[i]);
             frmdata.set('pphoto_name', fileName);
-            let data = frmdata.entries();          
-            //console.log("JS " + fileName);
+            let data = frmdata.entries();  
+
+            let res = ''; 
+
+            if (uname){
+                console.log("HHH");
+                res = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json',
+                                'Authorization': `Basic ${btoa(uname.value + ':' + pass.value)}`,
+                    body: JSON.stringify(Object.fromEntries(data))
+                }});
+            } else {
+                res = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(Object.fromEntries(data))
+                });
+            }
+                        
             
-            const res = await fetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(Object.fromEntries(data))
-            });
             //listOfForms[i].removeChild(picname);
             fileName = "";
             const result = await res.json();
+            console.log("USER:" + loginGetFlag)
             if (addLogin) {
                 if (res.status === 200) {
-                    window.open('/user/user_profile');
+                    window.open('/user/user_profile?user=' + result['user'], "_self");
+                    //console.log("USER:" + res.user)
                     suc_mes.style.display = "flex";
                     fail_mes.style.display = "none";
+                    loginGetFlag = false;
                 } else {
                     fail_mes.style.display = "flex";
                     suc_mes.style.display = "none";

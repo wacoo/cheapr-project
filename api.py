@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request, make_response, abort, current_app
+from flask import Blueprint, jsonify, request, make_response, abort, current_app, url_for, redirect
 from models.engine.file_storage import Storage
 from models.product import Product
 from models.service import Service
@@ -148,6 +148,10 @@ def get_cheapest_any(cls):
             pro_pri['product'] = obj['brand'] +"_"+ obj['model'] +"_"+ obj['status'] +"_"+ obj['quality']
             pro_pri['price'] = obj['price']
             pro_pri['shop'] = obj['shop']
+            if obj['photo']:
+                pro_pri['image'] = 'images/upload/'+ obj['photo']
+            else:
+                pro_pri['image'] = ''
             loc = get_gps(obj['shop'], 'Shop')
             if loc:
                 pro_pri['location'] = loc#get_gps(prod['shop'], 'Shop')
@@ -160,6 +164,10 @@ def get_cheapest_any(cls):
             srv_pri['service'] = obj['name'] +"_"+ obj['quality']
             srv_pri['price'] = obj['price']
             srv_pri['shop'] = obj['provider']
+            if obj['photo']:
+                srv_pri['image'] = 'images/upload/'+ obj['photo']
+            else:
+                srv_pri['image'] = ''
             loc = get_gps(obj['provider'], 'Shop')
             if loc:
                 srv_pri['location'] = loc#get_gps(srv['provider'], 'Shop')
@@ -409,3 +417,6 @@ def update_product_service():
 @api.route("/update/promotion", methods=["GET", "PUT"])
 def update_promotion():
     return
+@api.route("/api/v1/image")
+def image():
+    return redirect(url_for('static', filename = 'images/upload/11.png'))

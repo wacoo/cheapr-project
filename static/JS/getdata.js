@@ -23,7 +23,8 @@ if (tbl_prod){
 }
 else if (tbl_shop){
     url = 'http://localhost:5000/api/v1/shops';
-if (tbl_prod || tbl_serv){
+}
+if (tbl_prod || tbl_serv || tbl_shop){
     cheapestShops(url);
 }
 
@@ -41,22 +42,27 @@ async function cheapestShops(url){
         let row2 = head.insertRow();
         let row = head.insertRow();
         row.style.backgroundColor = '#4a9be2';
-        row2.style.backgroundColor = '#4a9be5';        
-        let cell1 = row.insertCell(0);
-        let cell2 = row.insertCell(1);
-        let cell3 = row.insertCell(2);
-        row2.insertCell(0);
-        let cellt = row2.insertCell(1);
-        row2.insertCell(2);
+        //row2.style.backgroundColor = 'none';
+        let cell0 = row.insertCell();       
+        let cell1 = row.insertCell();
+        let cell2 = row.insertCell();
+        let cell3 = row.insertCell();
+        //row2.insertCell(0);
+        //let cellt = row2.insertCell(1);
+        //row2.insertCell(2);
+        //row2.insertCell(3);
         if (tbl_prod){
-            cellt.innerHTML = result[i][0]['product'].split('_')[0];
+            //cellt.innerHTML = '<h3>' + result[i][0]['product'].split('_')[0] + '</h3>';
         }  else if (tbl_serv){
             console.log(result[i][0]);
-            cellt.innerHTML = result[i][0]['service'].split('_')[0];
+            //ellt.innerHTML = '<h2>' + result[i][0]['service'].split('_')[0] + '</h3>';
+            //cellt.innerHTML = result[i][0]['service'].split('_')[0];
         } else if (tbl_shop){
-            cellt.innerHTML = result[i][0]['shop'].split('_')[0];
-        }              
-        cell1.innerHTML = "Shop";
+            //cellt.innerHTML = result[i][0]['shop'].split('_')[0];
+            //cellt.innerHTML = '<h3>' + result[i][0]['shop'].split('_')[0] + '</h3>';
+        }
+        cell0.innerHTML = "Rank";            
+        cell1.innerHTML = "Store/Provider";
         cell2.innerHTML = "Product/Service";
         cell3.innerHTML = "Price";
         //console.log(result); 
@@ -69,9 +75,11 @@ async function cheapestShops(url){
                 price = result[i][j]['price'];
                 //st = "Brand: " + spPr[0] + "\nModel: " + spPr[1] + "\nStatus: " + spPr[2] + "\nQuality: " + spPr[3];
                 row = head.insertRow();
-                cell1 = row.insertCell(0);
-                cell2 = row.insertCell(1);
-                cell3 = row.insertCell(2);
+                cell0 = row.insertCell()
+                cell1 = row.insertCell();
+                cell2 = row.insertCell();
+                cell3 = row.insertCell();
+                cell0.innerHTML = j + 1;
                 cell1.innerHTML = shop;
                 cell2.innerHTML = brand;
                 cell3.innerHTML = price;
@@ -84,22 +92,32 @@ async function cheapestShops(url){
                 price = result[i][j]['price'];
                 //st = "Brand: " + spPr[0] + "\nModel: " + spPr[1] + "\nStatus: " + spPr[2] + "\nQuality: " + spPr[3];
                 row = head.insertRow();
-                cell1 = row.insertCell(0);
-                cell2 = row.insertCell(1);
-                cell3 = row.insertCell(2);
+                cell0 = row.insertCell()
+                cell1 = row.insertCell();
+                cell2 = row.insertCell();
+                cell3 = row.insertCell();
+                cell0.innerHTML = j + 1;
                 cell1.innerHTML = shop;
                 cell2.innerHTML = service;
                 cell3.innerHTML = price;
             } else if (tbl_shop){
-                brand = result[i][j]['product'] || result[i][j]['service'];
-                brand =brand.replaceAll('_', ' ');
-                shop = result[i][j]['shop'];
-                price = result[i][j]['price'];
+                brand = '';
+                shop = '';
+                price = '';
+                if (result[i][0]['shop'] == result[i][j]['shop']) {
+                    brand = result[i][j]['product'] || result[i][j]['service'];
+                    brand =brand.replaceAll('_', ' ');
+                    shop = result[i][j]['shop'];
+                    price = result[i][j]['price'];
+                }                    
+                
                 //st = "Brand: " + spPr[0] + "\nModel: " + spPr[1] + "\nStatus: " + spPr[2] + "\nQuality: " + spPr[3];
                 row = head.insertRow();
-                cell1 = row.insertCell(0);
-                cell2 = row.insertCell(1);
-                cell3 = row.insertCell(2);
+                cell0 = row.insertCell(0);
+                cell1 = row.insertCell(1);
+                cell2 = row.insertCell(2);
+                cell3 = row.insertCell(3);
+                cell0.innerHTML = j + 1;
                 cell1.innerHTML = shop;
                 cell2.innerHTML = brand;
                 cell3.innerHTML = price;
@@ -151,4 +169,4 @@ async function cheapestShops(url){
         }
     }
 }*/
-}
+

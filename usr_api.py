@@ -15,54 +15,31 @@ def index():
 @login.route('/profile')
 #@auth.login_required
 def profile():
-    user = request.args['user']    
+    user = session['user']   
     return make_response(jsonify({'status': "Login Succuss!", 'user': user}), 200)
 
 @login.route('/user_profile')
-#@auth.login_required
+@auth.login_required
 def profile_page():
-    user = request.args['user']
-    return render_template('profile.html', usr = user)
+    #user = session['user']
+    return render_template('profile.html')
 
-@login.route('/login', methods=['GET', 'POST'])
+@login.route('/login', methods=['GET'])
 def log():
-    
-    if request.method == "POST":
-        data = request.get_json()    
-        uname = data["lusname"]
-        passwd = data["lpwd"]
-        storage.reload()
-
-        pass1 = storage.getpass(uname)
-        print(pwd_context.encrypt(passwd))
-        print("=")
-        print(pass1)
-        if verifyPassword(passwd, pass1):
-            session['user'] = uname
-            session['logged_in'] = True
+    return render_template('login.html')
+    '''if session['logged_in']:
+            uname = session['user']           
             return redirect(url_for('login.profile', user = uname))
-        else:
-            return make_response(jsonify({'status': "Wrong password"}), 401)
-    else:
-        return render_template('login.html')
-
-'''@login.route('/login', methods=['POST'])
+        else:'''            
+    
+@login.route('/login', methods=['POST'])
+@auth.login_required
 def login_post():
     
-    """ verify user """ 
-    data = request.get_json()    
-    uname = data["lusname"]
-    passwd = data["lpwd"]
-    storage.reload()
-
-    pass1 = storage.getpass(uname)
-    print(pass1)
-    if verifyPassword(pass1, passwd):
-        session['user'] = uname
-        session['logged_in'] = True
-        return redirect('login.profile_page', user = session['user'])
-    else:
-        return make_response(jsonify({'status': "Wring password"}), 401)'''
+    """ verify user """
+    return redirect(url_for('login.profile'))
+    '''else:
+        return make_response(jsonify({'status': "Wrong password"}), 401)'''
 
 @login.route('/signup')
 def signup():
@@ -90,7 +67,7 @@ def signup_post():
         user.middlename = mname
         user.lastname = lname
         user.username = uname
-        user.password = pwd_context.encrypt(passwd)
+        user.password = generate_password_hash(passwd)
         user.city = city
         user.usertype = utype
         user.gps_location = gps
@@ -112,8 +89,23 @@ def logout():
     print("Logout Success!")
     return 'Logout'
 
-def verifyPassword(upass, hpass):
-    if (pwd_context.verify(upass, hpass)):
+@auth.verify_password
+def verifyPassword(username, password):
+    print(username +'='+ password)
+    storage.reload()
+    hashed = storage.getpass(username)
+    if username and check_password_hash(hashed, password):        
+        session['user'] = username
         return True
+    elif 'user' in session.keys():
+        if session['user']:
+            print(username +'C='+ password)
+            return True
+        else:
+            return False
     else:
         return False
+
+def getSession():
+    ''' return current session'''
+    return session['user']
