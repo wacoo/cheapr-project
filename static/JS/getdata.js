@@ -23,9 +23,10 @@ if (tbl_prod){
 }
 else if (tbl_shop){
     url = 'http://localhost:5000/api/v1/shops';
+if (tbl_prod || tbl_serv){
+    cheapestShops(url);
 }
 
-cheapestShops(url);
 //sortTable();
 async function cheapestShops(url){
     const res = await fetch(url);
@@ -150,5 +151,4 @@ async function cheapestShops(url){
         }
     }
 }*/
-
-
+}

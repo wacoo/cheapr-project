@@ -4,6 +4,7 @@ from models.product import Product
 from models.service import Service
 from models.shop import Shop
 from models.user import User
+from usr_api import auth
 #from app import app
 from support.gps import within_a_radius, get_current_gps_coord
 from werkzeug.utils import secure_filename
@@ -240,6 +241,7 @@ def get_cheapest(near_shops, list_names, count, cls):
     #get_list_of_products()
     """ DELETE """
 @api.route("/del/<uname>", methods=["GET", "DELETE"])
+@auth.login_required
 def delete(uname=None):
     """ remove object """
     if uname:
@@ -252,7 +254,8 @@ def delete(uname=None):
     return jsonify({"result": "not deleted"})
 
 """ POST """
-@api.route("/add/user", methods=["POST"])
+'''@api.route("/add/user", methods=["POST"])
+@auth.login_required
 def add_user():
     data = request.get_json()
     """ add new user """ 
@@ -286,9 +289,10 @@ def add_user():
         else:
             return make_response(jsonify({'status': 'error'}), 500)
     else:
-        return make_response(jsonify({'status': 'user.id'}), 400)
+        return make_response(jsonify({'status': 'user.id'}), 400)'''
 
 @api.route("/add/shop", methods=["POST"])
+@auth.login_required
 def add_shop():
     data = request.get_json()
     owner = data["sowner"]
@@ -316,6 +320,7 @@ def add_shop():
     #return make_response(jsonify({'user id': data}), 200)
 
 @api.route("/add/photo", methods=["POST"])
+@auth.login_required
 def add_photo():
     if 'pphoto' not in request.files:
         return make_response(jsonify({'message': 'No file part in request'}), 400)
@@ -328,6 +333,7 @@ def add_photo():
         return jsonify({'fn':filename});#make_response(jsonify({'status': 'upload success'}), 200);
 
 @api.route("/add/product", methods=["POST"])
+@auth.login_required
 def add_product():
     data = request.get_json()    
     name = data["pname"]
@@ -360,6 +366,7 @@ def add_product():
         return make_response(jsonify({'status': 'error'}), 500)
 
 @api.route("/add/service", methods=["POST"])
+@auth.login_required
 def add_service():
     data = request.get_json()    
     name = data["sname"]
@@ -385,6 +392,7 @@ def add_service():
         return make_response(jsonify({'status': 'error'}), 500)
     
 @api.route("/add/promotion", methods=["GET", "POST"])
+@auth.login_required
 def add_promotion():
     return
 

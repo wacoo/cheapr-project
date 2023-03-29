@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{% block title %} User Login {% endblock %}</h1>
+<section class="container">    
+    <div class="cat">
+        <div class="reg">
+            <form action="" id = "add_login">                
+                <p>
+                    <label for="lusname">Username:</label>
+                    <input type="text" id="lusname"  name="lusname" placeholder="Username">
+                </p>                
+                <p>
+                    <label for="lpwd">Password:</label>
+                    <input type="password" id="lpwd"  name="lpwd" placeholder="Password">
+                </p>                   
+                <div>                    
+                    <p class="input_last">                        
+                        <button type="submit" id="submit">Submit</button>
+                    </p>
+                </div> 
+            </form>
+            <div id="status_suc">
+                <img src="/static/images/success.png" alt="success icon" width="50px">
+                <em>Login Success!</em> 
+            </div>
+            <div id="status_fail">
+                <img src="/static/images/error.png" alt="success icon" width="50px">
+                <em>Login Filure!</em> 
+            </div>  
+        </div>
+    </div>
+</section>
+{% endblock %}
