@@ -40,7 +40,7 @@ def log():
         if verifyPassword(passwd, pass1):
             session['user'] = uname
             session['logged_in'] = True
-            return redirect(url_for('profile', user = uname))
+            return redirect(url_for('login.profile', user = uname))
         else:
             return make_response(jsonify({'status': "Wrong password"}), 401)
     else:
