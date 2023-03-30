@@ -3,10 +3,12 @@ from models.engine.file_storage import Storage
 from views import views
 from api import api
 from flask_login import LoginManager
+from flask_cors import CORS, cross_origin
 from usr_api import login
 import os
 
 app = Flask(__name__)
+cors = CORS(app)
 app.register_blueprint(views, url_prefix="/views")
 app.register_blueprint(api, url_prefix="/api/v1")
 app.register_blueprint(login, url_prefix="/user")

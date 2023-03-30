@@ -166,8 +166,9 @@ section{
     margin: 10px;
     border-radius: 10px;
     background-color: azure;
-    padding-bottom:80px;
+    padding-bottom:100px;
     position: relative;
+    text-align: center;
 }
 .box div img{
     position: absolute;
@@ -177,9 +178,15 @@ section{
     height: 18vw;
     z-index: 3;
 }
+.box h5{
+    margin: 10px;
+    padding: 0;
+}
 .box img{
     width: 39vw;    
-    height: 25.5vw;
+    height: 23vw;
+    margin-bottom: 0;
+    padding-bottom: 0;
     /* padding-top: .5vw; */
 }
 .sign{    

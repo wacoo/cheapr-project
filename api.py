@@ -149,7 +149,7 @@ def get_cheapest_any(cls):
             pro_pri['price'] = obj['price']
             pro_pri['shop'] = obj['shop']
             if obj['photo']:
-                pro_pri['image'] = 'images/upload/'+ obj['photo']
+                pro_pri['image'] = '/images/upload/'+ obj['photo']
             else:
                 pro_pri['image'] = ''
             loc = get_gps(obj['shop'], 'Shop')
@@ -165,7 +165,7 @@ def get_cheapest_any(cls):
             srv_pri['price'] = obj['price']
             srv_pri['shop'] = obj['provider']
             if obj['photo']:
-                srv_pri['image'] = 'images/upload/'+ obj['photo']
+                srv_pri['image'] = '/images/upload/'+ obj['photo']
             else:
                 srv_pri['image'] = ''
             loc = get_gps(obj['provider'], 'Shop')

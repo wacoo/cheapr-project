@@ -1,4 +1,5 @@
 let flag =false;
+let resData = [];
 //document.onload(getLocation());
 async function getLocation() {
     url = "http://ipinfo.io/json";
@@ -15,6 +16,8 @@ if (!flag) {
 let tbl_prod = document.getElementById('table_good');
 let tbl_serv = document.getElementById('table_service');
 let tbl_shop = document.getElementById('table_shop');
+const box1 = document.getElementById('box1');
+const box2 = document.getElementById('box2');
 url = ""
 if (tbl_prod){
     url = 'http://localhost:5000/api/v1/products';
@@ -32,7 +35,7 @@ if (tbl_prod || tbl_serv || tbl_shop){
 async function cheapestShops(url){
     const res = await fetch(url);
     const result = await res.json();
-    console.log(result)
+    console.log(result);    
     //let i = 0;    
     let k = 0;
     for (let i = 0; i < result.length; i++) {
@@ -42,47 +45,40 @@ async function cheapestShops(url){
         let row2 = head.insertRow();
         let row = head.insertRow();
         row.style.backgroundColor = '#4a9be2';
-        //row2.style.backgroundColor = 'none';
         let cell0 = row.insertCell();       
         let cell1 = row.insertCell();
         let cell2 = row.insertCell();
         let cell3 = row.insertCell();
-        //row2.insertCell(0);
-        //let cellt = row2.insertCell(1);
-        //row2.insertCell(2);
-        //row2.insertCell(3);
+        let cell4 = row.insertCell();
         if (tbl_prod){
-            //cellt.innerHTML = '<h3>' + result[i][0]['product'].split('_')[0] + '</h3>';
         }  else if (tbl_serv){
             console.log(result[i][0]);
-            //ellt.innerHTML = '<h2>' + result[i][0]['service'].split('_')[0] + '</h3>';
-            //cellt.innerHTML = result[i][0]['service'].split('_')[0];
         } else if (tbl_shop){
-            //cellt.innerHTML = result[i][0]['shop'].split('_')[0];
-            //cellt.innerHTML = '<h3>' + result[i][0]['shop'].split('_')[0] + '</h3>';
         }
         cell0.innerHTML = "Rank";            
         cell1.innerHTML = "Store/Provider";
         cell2.innerHTML = "Product/Service";
         cell3.innerHTML = "Price";
-        //console.log(result); 
+        cell4.innerHTML = "Location";
+        resData.push(result[i][0]);
         for (let j = 0; j < result[i].length; j++) {
-            ///console.log(result[i][j]);
             if (tbl_prod){
                 brand = result[i][j]['product'];
                 brand =brand.replaceAll('_', ' ');
                 shop = result[i][j]['shop'];
                 price = result[i][j]['price'];
-                //st = "Brand: " + spPr[0] + "\nModel: " + spPr[1] + "\nStatus: " + spPr[2] + "\nQuality: " + spPr[3];
+                loc = result[i][j]['location'];
                 row = head.insertRow();
                 cell0 = row.insertCell()
                 cell1 = row.insertCell();
                 cell2 = row.insertCell();
                 cell3 = row.insertCell();
+                cell4 = row.insertCell();
                 cell0.innerHTML = j + 1;
                 cell1.innerHTML = shop;
                 cell2.innerHTML = brand;
                 cell3.innerHTML = price;
+                cell4.innerHTML = loc;
             }
             else if (tbl_serv){
                 service = result[i][j]['service'];
@@ -90,37 +86,41 @@ async function cheapestShops(url){
                 service = service.replaceAll('_', ' ');
                 shop = result[i][j]['shop'];
                 price = result[i][j]['price'];
-                //st = "Brand: " + spPr[0] + "\nModel: " + spPr[1] + "\nStatus: " + spPr[2] + "\nQuality: " + spPr[3];
+                loc = result[i][j]['location'];
                 row = head.insertRow();
                 cell0 = row.insertCell()
                 cell1 = row.insertCell();
                 cell2 = row.insertCell();
                 cell3 = row.insertCell();
+                cell4 = row.insertCell();
                 cell0.innerHTML = j + 1;
                 cell1.innerHTML = shop;
                 cell2.innerHTML = service;
                 cell3.innerHTML = price;
+                cell4.innerHTML = loc;
             } else if (tbl_shop){
                 brand = '';
                 shop = '';
                 price = '';
+                loc = '';
                 if (result[i][0]['shop'] == result[i][j]['shop']) {
                     brand = result[i][j]['product'] || result[i][j]['service'];
                     brand =brand.replaceAll('_', ' ');
                     shop = result[i][j]['shop'];
                     price = result[i][j]['price'];
+                    loc = result[i][j]['location'];
                 }                    
-                
-                //st = "Brand: " + spPr[0] + "\nModel: " + spPr[1] + "\nStatus: " + spPr[2] + "\nQuality: " + spPr[3];
                 row = head.insertRow();
                 cell0 = row.insertCell(0);
                 cell1 = row.insertCell(1);
                 cell2 = row.insertCell(2);
                 cell3 = row.insertCell(3);
+                cell4 = row.insertCell(4);
                 cell0.innerHTML = j + 1;
                 cell1.innerHTML = shop;
                 cell2.innerHTML = brand;
                 cell3.innerHTML = price;
+                cell4.innerHTML = loc;
             }
             
             k++;
