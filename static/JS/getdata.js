@@ -1,12 +1,6 @@
 let flag =false;
 let resData = [];
 //document.onload(getLocation());
-async function getLocation() {
-    url = "http://ipinfo.io/json";
-    const res = await fetch(url);
-    //const result = await res.json();
-    console.log(res);
-}
 if (!flag) {
     flag = true;
     //getLocation();
@@ -19,6 +13,7 @@ let tbl_shop = document.getElementById('table_shop');
 const box1 = document.getElementById('box1');
 const box2 = document.getElementById('box2');
 url = ""
+//console.log(getCoordinates());
 if (tbl_prod){
     url = 'http://localhost:5000/api/v1/products';
 }else if (tbl_serv){
@@ -30,12 +25,30 @@ else if (tbl_shop){
 if (tbl_prod || tbl_serv || tbl_shop){
     cheapestShops(url);
 }
-
+async function getCoordinates() {
+    return new Promise((resolve, reject) => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          var latitude = position.coords.latitude;
+          var longitude = position.coords.longitude;
+          var coordinates = latitude + ',' + longitude;
+          resolve(coordinates);
+        }, function(error) {
+          reject(error.message);
+        });
+      } else {
+        reject("Geolocation is not supported by this browser.");
+      }
+    });
+  }
 //sortTable();
 async function cheapestShops(url){
-    const res = await fetch(url);
+    let gps = await getCoordinates();
+    console.log(gps); 
+    const res = await fetch(url + '?gps=' + gps);
     const result = await res.json();
-    console.log(result);    
+    console.log(result); 
+    console.log(gps);   
     //let i = 0;    
     let k = 0;
     for (let i = 0; i < result.length; i++) {
@@ -78,7 +91,7 @@ async function cheapestShops(url){
                 cell1.innerHTML = shop;
                 cell2.innerHTML = brand;
                 cell3.innerHTML = price;
-                cell4.innerHTML = loc;
+                cell4.innerHTML = '<a href="https://maps.google.com/?q=' + loc + '" target="_blank">Open on Map...</a>';
             }
             else if (tbl_serv){
                 service = result[i][j]['service'];
@@ -97,7 +110,7 @@ async function cheapestShops(url){
                 cell1.innerHTML = shop;
                 cell2.innerHTML = service;
                 cell3.innerHTML = price;
-                cell4.innerHTML = loc;
+                cell4.innerHTML = '<a href="https://maps.google.com/?q=' + loc + '" target="_blank">Open on Map...</a>';
             } else if (tbl_shop){
                 brand = '';
                 shop = '';
@@ -120,7 +133,7 @@ async function cheapestShops(url){
                 cell1.innerHTML = shop;
                 cell2.innerHTML = brand;
                 cell3.innerHTML = price;
-                cell4.innerHTML = loc;
+                cell4.innerHTML = '<a href="https://maps.google.com/?q=' + loc + '" target="_blank">Open on Map...</a>';
             }
             
             k++;
@@ -135,8 +148,7 @@ async function cheapestShops(url){
             tbl_shop.appendChild(tab);
         }
                       
-    }
-       
+    } 
 }
 
 /*function sortTable() {

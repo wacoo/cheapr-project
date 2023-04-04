@@ -79,8 +79,8 @@ function loopThrough() {
         }
         catch (e) {
             //console.log(i);
-            i++;
-            j++;
+            //i++;
+            //j++;
     
         }
 
@@ -101,15 +101,18 @@ function stateChange(url1, url2) {
 
     }, 2000);
 }
+if (box11){
+    box11.addEventListener('error', function handleError() {
+        console.log(box11.src);
+      
+        box11.src = '/static/images/placeholder.webp';
+      });
+}
 
-box11.addEventListener('error', function handleError() {
-    console.log(box11.src);
-  
-    box11.src = '/static/images/placeholder.webp';
-  });
-
+if (box22){
   box22.addEventListener('error', function handleError() {
     console.log(box22.src);
   
     box22.src = '/static/images/placeholder.webp';
   });
+}

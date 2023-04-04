@@ -132,7 +132,7 @@ def get_gps(param, cls):
             if obj['name'] == param:
                 return obj['gps_location']
 
-def get_cheapest_any(cls):
+def get_cheapest_any(cls, my_gps):
     """ returns chespest goods/services with in a given area """
     storage.reload()
     objs = storage.getby(cls)
@@ -188,9 +188,11 @@ def get_cheapest_any(cls):
             loc_long = locale.atof(pgps[1])
             loc_lat = locale.atof(pgps[0])
         radius = 2 #km
+        user_long = ''
+        user_lat = ''
         if not my_gps:
             my_gps = '9.034804,38.761256'#get_current_gps_coord()
-            gp = my_gps.split(',')
+        gp = my_gps.split(',')
         user_long = gp[1]
         user_lat = gp[0]
         if my_gps:
@@ -213,17 +215,23 @@ def get_cheapest_any(cls):
      
 @api.route("/products", methods=["GET"])
 def get_cheapest_products():
-   return get_cheapest_any('Product')
+   gps = request.args['gps']
+   print(gps)
+   return get_cheapest_any('Product', gps)
 
 @api.route("/services", methods=["GET"])
 def get_cheapest_services():
-    return get_cheapest_any('Service')
+    gps = request.args['gps']
+    print(gps)
+    return get_cheapest_any('Service', gps)
 
 @api.route("/shops", methods=["GET"])
 def get_cheapest_shops():
     lst = []
-    products = get_cheapest_any('Product')
-    service = get_cheapest_any('Service')
+    gps = request.args['gps']
+    print(gps)
+    products = get_cheapest_any('Product', gps)
+    service = get_cheapest_any('Service', gps)
     lst = products + service
     return lst
 
