@@ -15,7 +15,6 @@ The rest is strait foreward.
 Screeshots
 
 ![alt text](https://drive.google.com/uc?id=10ivHjPXFVO1gni3ahx8t0hcX9lY9J5Hj)
-![alt text](https://drive.google.com/uc?id=10ivHjPXFVO1gni3ahx8t0hcX9lY9J5Hj)
 ![alt text](https://drive.google.com/uc?id=10i8azQZllkuL-KND1zyAyS3aWTHNDuxq)
 ![alt text](https://drive.google.com/uc?id=10hH9pImNIKa07nfAANwIop0FHjvUWSTX)
 ![alt text](https://drive.google.com/uc?id=10h5OdUce_XonWxkJ5lG9QtJiLMOC9oz8)
