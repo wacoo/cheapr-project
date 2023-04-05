@@ -1,19 +1,15 @@
 let flag =false;
 let resData = [];
-//document.onload(getLocation());
 if (!flag) {
     flag = true;
-    //getLocation();
 }
 
-//let tbl = document.getElementById('tbl');
 let tbl_prod = document.getElementById('table_good');
 let tbl_serv = document.getElementById('table_service');
 let tbl_shop = document.getElementById('table_shop');
 const box1 = document.getElementById('box1');
 const box2 = document.getElementById('box2');
 url = ""
-//console.log(getCoordinates());
 if (tbl_prod){
     url = 'http://localhost:5000/api/v1/products';
 }else if (tbl_serv){
@@ -26,6 +22,7 @@ if (tbl_prod || tbl_serv || tbl_shop){
     cheapestShops(url);
 }
 async function getCoordinates() {
+    /* get user coordinates */
     return new Promise((resolve, reject) => {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
@@ -41,15 +38,12 @@ async function getCoordinates() {
       }
     });
   }
-//sortTable();
 async function cheapestShops(url){
+    /* fetch data from server and populate pages */
     let gps = await getCoordinates();
     console.log(gps); 
     const res = await fetch(url + '?gps=' + gps);
-    const result = await res.json();
-    console.log(result); 
-    console.log(gps);   
-    //let i = 0;    
+    const result = await res.json();    
     let k = 0;
     for (let i = 0; i < result.length; i++) {
         let tab = document.createElement('table');
@@ -62,12 +56,7 @@ async function cheapestShops(url){
         let cell1 = row.insertCell();
         let cell2 = row.insertCell();
         let cell3 = row.insertCell();
-        let cell4 = row.insertCell();
-        if (tbl_prod){
-        }  else if (tbl_serv){
-            console.log(result[i][0]);
-        } else if (tbl_shop){
-        }
+        let cell4 = row.insertCell();        
         cell0.innerHTML = "Rank";            
         cell1.innerHTML = "Store/Provider";
         cell2.innerHTML = "Product/Service";
@@ -91,7 +80,7 @@ async function cheapestShops(url){
                 cell1.innerHTML = shop;
                 cell2.innerHTML = brand;
                 cell3.innerHTML = price;
-                cell4.innerHTML = '<a href="https://maps.google.com/?q=' + loc + '" target="_blank">Open on Map...</a>';
+                cell4.innerHTML = '<a href="https://maps.google.com/?q=' + loc + '" target="_blank"><img src="/static/images/google-maps-2961754.webp" width="150px"></a>';
             }
             else if (tbl_serv){
                 service = result[i][j]['service'];
@@ -110,7 +99,7 @@ async function cheapestShops(url){
                 cell1.innerHTML = shop;
                 cell2.innerHTML = service;
                 cell3.innerHTML = price;
-                cell4.innerHTML = '<a href="https://maps.google.com/?q=' + loc + '" target="_blank">Open on Map...</a>';
+                cell4.innerHTML = '<a href="https://maps.google.com/?q=' + loc + '" target="_blank"><img src="/static/images/google-maps-2961754.webp" width="150px"></a>';
             } else if (tbl_shop){
                 brand = '';
                 shop = '';
@@ -122,8 +111,7 @@ async function cheapestShops(url){
                     shop = result[i][j]['shop'];
                     price = result[i][j]['price'];
                     loc = result[i][j]['location'];
-                }                    
-                row = head.insertRow();
+                    row = head.insertRow();
                 cell0 = row.insertCell(0);
                 cell1 = row.insertCell(1);
                 cell2 = row.insertCell(2);
@@ -133,7 +121,9 @@ async function cheapestShops(url){
                 cell1.innerHTML = shop;
                 cell2.innerHTML = brand;
                 cell3.innerHTML = price;
-                cell4.innerHTML = '<a href="https://maps.google.com/?q=' + loc + '" target="_blank">Open on Map...</a>';
+                cell4.innerHTML = '<a href="https://maps.google.com/?q=' + loc + '" target="_blank"><img src="/static/images/google-maps-2961754.webp" width="150px"></a>';
+                }                    
+                
             }
             
             k++;
@@ -150,35 +140,3 @@ async function cheapestShops(url){
                       
     } 
 }
-
-/*function sortTable() {
-    let table, i, x, y;
-    table = tbl;
-    let switching = true;
-  
-    // Run loop until no switching is needed
-    while (switching) {
-        switching = false;
-        let rows = table.rows;
-  
-        // Loop to go through all rows
-        for (i = 1; i < (rows.length - 1); i++) {
-            let Switch = false;
-  
-            // Fetch 2 elements that need to be compared
-            x = rows[i].getElementsByTagName("td")[2];
-            y = rows[i + 1].getElementsByTagName("td")[2];  
-            if (x.innerHTML > y.innerHTML) {
-                allRows[i].parentNode.insertBefore(allRows[i + 1], allRows[i]);
-                switchContinue = true;
-                break;
-             }
-            if (Switch) {
-                // Function to switch rows and mark switch as completed
-                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                switching = true;
-            }
-        }
-    }
-}*/
-

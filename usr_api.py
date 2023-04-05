@@ -8,48 +8,43 @@ from passlib.apps import custom_app_context as pwd_context
 auth = HTTPBasicAuth()
 storage = Storage()
 login = Blueprint('login', __name__)
-@login.route('/')
-def index():
-    return 'Index'
+
+@auth.error_handler
+def unauth():
+    return make_response(jsonify({'status': 'Unauthorized Access!'}), 403)
 
 @login.route('/profile')
-#@auth.login_required
 def profile():
+    """ return user login success for profile page """
     user = session['user']   
     return make_response(jsonify({'status': "Login Succuss!", 'user': user}), 200)
 
 @login.route('/user_profile')
 @auth.login_required
 def profile_page():
-    #user = session['user']
+    """ open profile page """
     return render_template('profile.html')
 
 @login.route('/login', methods=['GET'])
 def log():
+    """ open login page """
     return render_template('login.html')
-    '''if session['logged_in']:
-            uname = session['user']           
-            return redirect(url_for('login.profile', user = uname))
-        else:'''            
-    
+
 @login.route('/login', methods=['POST'])
 @auth.login_required
-def login_post():
-    
-    """ verify user """
+def login_post():    
+    """ if user verified open user profile page """
     return redirect(url_for('login.profile'))
-    '''else:
-        return make_response(jsonify({'status': "Wrong password"}), 401)'''
 
 @login.route('/signup')
 def signup():
+    """ opne user registration page"""
     return render_template('register.html')
 
 @login.route('/signup', methods=['POST'])
 def signup_post():
     data = request.get_json()
     """ add new user """ 
-
     fname = data['rfname']
     mname = data["rmname"]
     lname = data["rlname"]
@@ -85,12 +80,14 @@ def signup_post():
 
 @login.route('/logout')
 def logout():
+    """ logout """
     session.clear()
     print("Logout Success!")
     return 'Logout'
 
 @auth.verify_password
 def verifyPassword(username, password):
+    """ verify user """
     print(username +'='+ password)
     storage.reload()
     hashed = storage.getpass(username)

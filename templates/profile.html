@@ -1,71 +1,47 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>{% block title %} User Profile {{usr}} {% endblock %}</h1>
+<h1 id = "prof_title">{% block title %} User Profile {% endblock %}</h1>
 <section class="container">    
     <div class="cat">
         <div class="reg">
-            <form action="" id = "add_user">
+            <form action="" id = "frm_profile">
                 <p>
-                <label for="rfamer">First Name:</label>
-                <input type="text" id="rfname"  name="rfname" placeholder="First Name">
+                    <p>
+                        <label for="rphoto">Image:</label>
+                        <img id = "rphoto" src="/static/images/placeholder.jpg" width="200px" alt="">
+                    </p>
+                <label for="rfname">First Name:</label>
+                <input type="text" id="rfname"  name="rfname" placeholder="First Name" disabled>
                 </p>
                 <p>
                     <label for="rmname">Middle Name:</label>
-                    <input type="text" id="rmname"  name="rmname" placeholder="Middle Name">
+                    <input type="text" id="rmname"  name="rmname" placeholder="Middle Name" disabled>
                 </p>
                 
                 <p>
                     <label for="rlname">Last Name:</label>
-                    <input type="text" id="rlname"  name="rlname" placeholder="Last Name">
+                    <input type="text" id="rlname"  name="rlname" placeholder="Last Name" disabled>
                 </p>
                 <p>
                     <label for="rusname">Username:</label>
-                    <input type="text" id="rusname"  name="rusname" placeholder="Username">
-                </p>                
-                <p>
-                    <label for="rpwd">Password:</label>
-                    <input type="password" id="rpwd"  name="rpwd" placeholder="Password">
-                </p>
-                <p>
-                    <label for="rcpwd">Confirm Password:</label>
-                    <input type="password" id="rcpwd"  name="rcpwd" placeholder="Password">
-                </p>
+                    <input type="text" id="rusname"  name="rusname" placeholder="Username" disabled>
+                </p> 
                 <p>
                     <label for="rcity">City of Residence:</label>
-                    <select name="rcity" id="rcity">
-                        <option value="Addis Ababa">Addis Ababa</option>
-                        <option value="Dire Dawa">Dire Dawa</option>
-                        <option value="Hawassa">Hawassa</option>
-                        <option value="Bahir Dar">Bahir Dar</option>
-                        <option value="Semera">Semera</option>
-                        <option value="Asosa">Asosa</option>
-                        <option value="Gambella">Gambella</option>
-                        <option value="Mekele">Mekele</option>
-                        <option value="Harar">Harar</option>
-                        <option value="Gigjiga">Gigjiga</option>
-                    </select>
+                    <input type="text" id="rcity"  name="rcity" placeholder="City" disabled>
                 </p>                
                 <p>
                     <label for="rtype">User Type:</label>
-                    <select name="rtype" id="rtype">
-                        <option value="regular">Regular</option>
-                        <option value="agent">Agent</option>
-                        <option value="admin">System Administrator</option>
-                    </select>
+                    <input type="text" id="rtype"  name="rtype" placeholder="User Type" disabled>
                 </p>
-                <p class="input_last">
-                    <label for="rlocation">Location:</label>
-                    <input type="text" id="rlocation"  name="rlocation" placeholder="Location">
-                    <button type="button" id="get_gps">Get Loc.</button>
-                </p> 
                 <p>
-                    <label for="pphoto">Photo:</label>
-                    <input type="file" id="pphoto"  name="pphoto" placeholder="Photo" accept="image/*">
-                </p>               
+                    <label for="rlocation">Location:</label>
+                    <input type="text" id="rlocation"  name="rlocation" placeholder="Location" disabled>
+                </p>                               
                 <div>                    
                     <p class="input_last">                        
-                        <button type="submit" id="submit">Submit</button>
+                        <button type="submit" id="submit">Edit</button>
                     </p>
                 </div> 
             </form>

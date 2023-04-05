@@ -79,6 +79,16 @@ class Storage:
                     lst.append(val.__dict__['name'])
         return None
     
+    def get_by_username(self, uname):
+        """ return an object requested """
+        lst = []
+        if uname:
+            for obj in self.all().values():
+                if obj.__dict__['__class__'] == "User":
+                    if (uname == obj.__dict__['username']):
+                        return obj.__dict__
+        return None
+    
     def getby(self, cls):
         """ return list of same class """
         lst = [];

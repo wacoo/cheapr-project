@@ -7,6 +7,7 @@ if (btn_loc){
 
 
 function getLocation() {
+    /* get user location */
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
     } else {
@@ -15,5 +16,6 @@ function getLocation() {
 }
 
 function showPosition(position) {
+    /* get longtude and latitude */
     txtloc.value = position.coords.latitude +","+ position.coords.longitude;
 }

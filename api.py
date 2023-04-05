@@ -5,8 +5,7 @@ from models.service import Service
 from models.shop import Shop
 from models.user import User
 from usr_api import auth
-#from app import app
-from support.gps import within_a_radius, get_current_gps_coord
+from support.gps import within_a_radius
 from werkzeug.utils import secure_filename
 import os
 import locale
@@ -22,7 +21,12 @@ def allowed_file(filename):
         return True
     else:
         return False  
-    
+
+@api.errorhandler(401)
+def not_found(e):
+    """ return unauthorized error"""
+    return make_response(jsonify({'status': 'Unauthorized Access!'}), 401)
+
 """ GET """
 @api.route("/", methods=["GET"], strict_slashes=False)
 def all():
@@ -58,6 +62,15 @@ def get_name():
         lst.append(d['name'])
     return jsonify(lst)
 
+@api.route("/get/info", methods=["GET"], strict_slashes=False)
+def get_user():
+    """ get user info """
+    lst = []
+    uname = request.args.get("uname")
+    storage.reload()    
+    data = storage.get_by_username(uname)
+    return jsonify(data)
+
 @api.route("/count", methods=["GET"], strict_slashes=False)
 @api.route("/count/<cls>", methods=["GET"], strict_slashes=False)
 def count(cls=None):
@@ -74,19 +87,6 @@ def count(cls=None):
         for key in all.keys():
             count += 1
     return jsonify({"count": count})
-
-'''@api.route("/shops", methods=["GET"])
-def get_cheapest_shops():
-    """ returns shops with the cheapest products/services 
-    
-    TODO finish the logic first before integration """
-    storage.reload()
-    products = storage.getby("Product")
-
-    # get cheapest shop, product, price
-
-    min_price = min(products, key=lambda x:x['price'])
-    return min_price '''
 
 def get_list_of_products(): 
     """ returns list of products """   
@@ -154,10 +154,8 @@ def get_cheapest_any(cls, my_gps):
                 pro_pri['image'] = ''
             loc = get_gps(obj['shop'], 'Shop')
             if loc:
-                pro_pri['location'] = loc#get_gps(prod['shop'], 'Shop')
+                pro_pri['location'] = loc
                 name = obj['brand'] +"_"+ obj['model'] +"_"+ obj['status'] +"_"+ obj['quality']
-                #if name not in fProduct:
-                    #fProduct.append(name)
                 obj_price.append(pro_pri)
         elif cls == "Service":
             srv_pri = {}
@@ -170,10 +168,8 @@ def get_cheapest_any(cls, my_gps):
                 srv_pri['image'] = ''
             loc = get_gps(obj['provider'], 'Shop')
             if loc:
-                srv_pri['location'] = loc#get_gps(srv['provider'], 'Shop')
+                srv_pri['location'] = loc
                 name = obj['name'] +"_"+ obj['quality']
-                #if name not in fProduct:
-                    #fProduct.append(name)
                 obj_price.append(srv_pri)
         
     lst_prod = obj_price
@@ -211,22 +207,25 @@ def get_cheapest_any(cls, my_gps):
                         list_of_names.append(lst['service'])
         
         cheapest = get_cheapest(near_shops, list_of_names, count, cls)
-    return cheapest#cheapest
+    return cheapest
      
 @api.route("/products", methods=["GET"])
 def get_cheapest_products():
+   """ returns list of cheapest shops with asked product in given km radius"""
    gps = request.args['gps']
-   print(gps)
    return get_cheapest_any('Product', gps)
 
 @api.route("/services", methods=["GET"])
 def get_cheapest_services():
+    """ returns list of cheapest shops with asked service in given km radius"""
     gps = request.args['gps']
     print(gps)
     return get_cheapest_any('Service', gps)
 
 @api.route("/shops", methods=["GET"])
 def get_cheapest_shops():
+    """ returns list of cheapest shops with asked
+        products aservice in given km radius"""
     lst = []
     gps = request.args['gps']
     print(gps)
@@ -249,12 +248,9 @@ def get_cheapest(near_shops, list_names, count, cls):
             if cls == 'Service':
                 name = pr['service']
             if ln == name:
-                list_of_same.append(pr)
-        #all_list.append(list_of_same)        
+                list_of_same.append(pr)       
         sorted_lst.append(sorted(list_of_same, key=lambda x:float(x['price'])))
     return sorted_lst
-    #within_a_radius(user_long, user_lat, loc_long, loc_lat, radius1, km);
-    #get_list_of_products()
     """ DELETE """
 @api.route("/del/<uname>", methods=["GET", "DELETE"])
 @auth.login_required
@@ -269,47 +265,10 @@ def delete(uname=None):
                 return jsonify({"result": "deleted"})
     return jsonify({"result": "not deleted"})
 
-""" POST """
-'''@api.route("/add/user", methods=["POST"])
-@auth.login_required
-def add_user():
-    data = request.get_json()
-    """ add new user """ 
-
-    fname = data['rfname']
-    mname = data["rmname"]
-    lname = data["rlname"]
-    uname = data["rusname"]
-    passwd = data["rpwd"]
-    cpasswd = data["rcpwd"]
-    city = data["rcity"]
-    utype = data["rtype"]
-    gps = data["rlocation"]
-    photo = data["pphoto_name"]
-
-    if passwd == cpasswd and passwd:
-        user = User()
-        user.firstname = fname
-        user.middlename = mname
-        user.lastname = lname
-        user.username = uname
-        user.password = passwd
-        user.city = city
-        user.usertype = utype
-        user.gps_location = gps
-        user.active = True
-        user.photo = photo
-        storage.reload()
-        if storage.new(user):
-            return make_response(jsonify({'user id': user.id}), 200)
-        else:
-            return make_response(jsonify({'status': 'error'}), 500)
-    else:
-        return make_response(jsonify({'status': 'user.id'}), 400)'''
-
 @api.route("/add/shop", methods=["POST"])
 @auth.login_required
 def add_shop():
+    """ adds a new shop to storage """
     data = request.get_json()
     owner = data["sowner"]
     shop = data["sname"]
@@ -331,13 +290,12 @@ def add_shop():
     if storage.new(shop1):
         return make_response(jsonify({'user id': shop1.id}), 200)
     else:
-        return make_response(jsonify({'status': 'error'}), 500) #owner +", "+ shop +", " + type  +", " + product_service +", " + city  +", " + gps
-
-    #return make_response(jsonify({'user id': data}), 200)
+        return make_response(jsonify({'status': 'error'}), 500)
 
 @api.route("/add/photo", methods=["POST"])
 @auth.login_required
 def add_photo():
+    """ stores new photo to static/images/upload folder """
     if 'pphoto' not in request.files:
         return make_response(jsonify({'message': 'No file part in request'}), 400)
     photo = request.files["pphoto"]
@@ -346,11 +304,12 @@ def add_photo():
     if photo: #and allowed_file(photo.filename):
         filename = secure_filename(photo.filename)
         photo.save(os.path.join(UPLOAD_FOLDER, filename))
-        return jsonify({'fn':filename});#make_response(jsonify({'status': 'upload success'}), 200);
+        return jsonify({'fn':filename})
 
 @api.route("/add/product", methods=["POST"])
 @auth.login_required
 def add_product():
+    """ adds new product to storage """
     data = request.get_json()    
     name = data["pname"]
     brand = data["pbrand"]
@@ -384,13 +343,13 @@ def add_product():
 @api.route("/add/service", methods=["POST"])
 @auth.login_required
 def add_service():
+    """ adds new service to storage """
     data = request.get_json()    
     name = data["sname"]
     category = data["scategory"]
     quality = data["squality"]
     price = data["sprice"]
-    provider = data["sprovider"]
-    #TODO need quality here    
+    provider = data["sprovider"]  
     photo = data["pphoto_name"]
 
     service = Service()
@@ -407,12 +366,13 @@ def add_service():
     else:
         return make_response(jsonify({'status': 'error'}), 500)
     
+""" TODO
 @api.route("/add/promotion", methods=["GET", "POST"])
 @auth.login_required
 def add_promotion():
     return
 
-""" PUT/UPDATE """
+''' PUT/UPDATE '''
 @api.route("/update/user", methods=["GET", "PUT"])
 def update_user():
     return
@@ -427,4 +387,4 @@ def update_promotion():
     return
 @api.route("/api/v1/image")
 def image():
-    return redirect(url_for('static', filename = 'images/upload/11.png'))
+    return redirect(url_for('static', filename = 'images/upload/11.png'))"""
