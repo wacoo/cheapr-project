@@ -9,4 +9,13 @@ Landing page: https://wacoo.github.com
 Installation
 
 Requirements: python3, flask, flaks_cors, passlib.apps, flask_httpauth,
+
 The rest is strait foreward.
+
+Screeshots
+![alt text](https://drive.google.com/file/d/10ivHjPXFVO1gni3ahx8t0hcX9lY9J5Hj/view?usp=sharing)
+![alt text](https://drive.google.com/file/d/10i8azQZllkuL-KND1zyAyS3aWTHNDuxq/view?usp=sharing)
+![alt text](https://drive.google.com/file/d/10hH9pImNIKa07nfAANwIop0FHjvUWSTX/view?usp=sharing)
+![alt text](https://drive.google.com/file/d/10h5OdUce_XonWxkJ5lG9QtJiLMOC9oz8/view?usp=sharing)
+![alt text](https://drive.google.com/file/d/10eMDkHU2NcrnT_uavozFC5XgdjekeYvE/view?usp=sharing)
+![alt text](https://drive.google.com/file/d/10iOZtSrjlZcrzyyeO5PZpe9ClGxlmJTy/view?usp=sharing)
