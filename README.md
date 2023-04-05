@@ -5,3 +5,8 @@ Designed, programmed, and tested by Wondmagegn Abriham Chosha, Cheapr offers a u
 The target audience for this project are those with low to medium incomes as even the slightest reduction in prices can have a significant impact on their daily lives.
 
 Landing page: https://wacoo.github.com
+
+Installation
+
+Requirements: python3, flask, flaks_cors, passlib.apps, flask_httpauth,
+The rest is strait foreward.
