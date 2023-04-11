@@ -53,26 +53,26 @@ function loopThrough() {
             if (ii < res_product.length) {
                 url1 = '/static' + res_product[ii]['image'];
                 box11.src = url1;
-                box1_text.innerHTML = "Product: " + res_product[ii]['product'].replaceAll('_', ' ') + "<br>Store: " + res_product[ii]['shop'] + "<br>Price: " + res_product[ii]['price'] + "ETB";
+                box1_text.innerHTML = "<a href='/views/goods'>Product: " + res_product[ii]['product'].replaceAll('_', ' ') + "<br>Store: " + res_product[ii]['shop'] + "<br>Price: " + res_product[ii]['price'] + "ETB</a>";
                 ii++;
             }
             else {
                 ii = 0;
                 url1 = '/static' + res_product[ii]['image'];
                 box11.src = url1;
-                box1_text.innerHTML = "Product: " + res_product[ii]['product'].replaceAll('_', ' ') + "<br>Store: " + res_product[ii]['shop'] + "<br>Price: " + res_product[ii]['price'] + "ETB";
+                box1_text.innerHTML = "<a href='/views/goods'>Product: " + res_product[ii]['product'].replaceAll('_', ' ') + "<br>Store: " + res_product[ii]['shop'] + "<br>Price: " + res_product[ii]['price'] + "ETB</a>";
             }
     
             if (jj < res_service.length) {
                 url2 = '/static' + res_service[jj]['image'];
                 box22.src = url2;
-                box2_text.innerHTML = "Service: " + res_service[jj]['service'].replaceAll('_', ' ') + "<br>Provider: " + res_service[jj]['shop'] + "<br>Price: " + res_service[ii]['price'] + "ETB";
+                box2_text.innerHTML = "<a href='/views/services'>Service: " + res_service[jj]['service'].replaceAll('_', ' ') + "<br>Provider: " + res_service[jj]['shop'] + "<br>Price: " + res_service[ii]['price'] + "ETB</a>";
                 jj++;
             } else {
                 jj = 0;
                 url2 = '/static' + res_service[jj]['image'];
                 box22.src = url2;
-                box2_text.innerHTML = "Service: " + res_service[jj]['service'].replaceAll('_', ' ') + "<br>Provider: " + res_service[jj]['shop'] + "<br>Price: " + res_service[ii]['price'] + "ETB";
+                box2_text.innerHTML = "<a href='/views/services'>Service: " + res_service[jj]['service'].replaceAll('_', ' ') + "<br>Provider: " + res_service[jj]['shop'] + "<br>Price: " + res_service[ii]['price'] + "ETB</a>";
             }
         }
         catch (e) {

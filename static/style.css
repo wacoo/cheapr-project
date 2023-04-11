@@ -181,6 +181,7 @@ section{
 .box h5{
     margin: 10px;
     padding: 0;
+    color: #c5531a;
 }
 .box img{
     width: 39vw;    
@@ -189,6 +190,22 @@ section{
     padding-bottom: 0;
     /* padding-top: .5vw; */
 }
+.box a{
+    text-decoration: none;
+}
+.box a:link{
+    color: #c5531a;
+}
+.box a:hover{
+    color:#333;
+}
+.box a:active{
+    color: aqua;
+}
+.box a:visited{
+    color: #c5531a;
+}
+
 .sign{    
     font-size: 3.5vw;
     font-weight: 600;
@@ -264,9 +281,14 @@ div.tbl_list{
    display: flex;
    font-size: 15px;
    color: #ddd;
+   margin-top: 70px;
 }
 .tbl_shops, .tbl_goods, .tbl_services{
-    padding-right: 50px;    
+    padding-right: 50px;
+    padding-top: 25px;    
+}
+.tbl_shops td, .tbl_goods td, .tbl_services td {
+    width: 2vw;
 }
 td{
     padding-right: 20px;

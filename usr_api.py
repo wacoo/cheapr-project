@@ -83,7 +83,7 @@ def logout():
     """ logout """
     session.clear()
     print("Logout Success!")
-    return 'Logout'
+    return make_response(jsonify({'status': 'Logout Success!'}), 200)
 
 @auth.verify_password
 def verifyPassword(username, password):

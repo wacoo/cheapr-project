@@ -91,7 +91,6 @@ function submitForm(i, url) {
             frmdata.set('pphoto_name', fileName);
             let data = frmdata.entries();
             let res = '';
-
             if (uname) {
                 /* for login */
                 res = await fetch(url, {
@@ -115,7 +114,7 @@ function submitForm(i, url) {
 
             if (addLogin) {
                 if (res.status === 200) {
-                    console.log("Success");
+                    console.log(result['user']);
                     localStorage.setItem('usr', result['user']);
                     window.open('/user/user_profile?user=' + result['user'], "_self");
                     suc_mes.style.display = "flex";
@@ -123,7 +122,8 @@ function submitForm(i, url) {
                     loginGetFlag = false;
 
                 } else {
-                    populateProfile(result['user']);
+                    console.log(result['user']);
+                    //populateProfile(result['user']);
                     fail_mes.style.display = "flex";
                     suc_mes.style.display = "none";
                 }
@@ -178,23 +178,31 @@ async function getAllShopName(url, cls) {
     }
 
 }
-user = localStorage.getItem('usr');
-if (user){
-    /* show logout menu */
+usr = localStorage.getItem('usr');
+changeLoginText(usr);
+function changeLoginText(user){
     if (user){
-        login_lg.href = '/user/logout';
-        login_lg.innerHTML = 'Logout';
-        //localStorage.removeItem('usr');
-    }
-    else {
-        login_lg.href = '/user/login';
-        login_lg.innerHTML = 'Login';
-    }
-    
+        /* show logout menu */
+        if (user){
+            login_lg.addEventListener('click', function (){
+                if(login_lg.innerHTML == 'Logout'){
+                    localStorage.removeItem('usr');
+                }
+            });                        
+            login_lg.href = '/user/logout';
+            login_lg.innerHTML = 'Logout';            
+        }
+        else {
+            login_lg.href = '/user/login';
+            login_lg.innerHTML = 'Login';
+        }
+        
+    } 
 }
+
 if (prof_page) {
     
-    populateProfile(user);
+    populateProfile(usr);
 }
 async function populateProfile(uname) {
     /* Populate profile page */
@@ -209,7 +217,7 @@ async function populateProfile(uname) {
 
     let res = await fetch('/api/v1/get/info?uname=' + uname);
     let result = await res.json();
-    
+    console.log('/api/v1/get/info?uname=' + uname);
     prof_title.innerHTML = 'User Profile, ' + result['firstname'];
     rphoto.src = '/static/images/upload/' + result['photo'];
     console.log(rphoto.src);
